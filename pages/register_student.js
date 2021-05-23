@@ -144,7 +144,6 @@ const Register_student = ({loading}) => {
               )}
               {currentTab === 3 && (
                 <div className="tab" style={{ display: "block" }}>
-                  {" "}
                   Preference
                   <div className="form-group">
                     <input
