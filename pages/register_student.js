@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-const Register_student = () => {
+const Register_student = ({loading}) => {
   const [currentTab, setCurrentTab] = useState(1);
 
   const goNext = () => {
@@ -197,9 +197,9 @@ const Register_student = () => {
                 </div>
               </div>
               <div style={{ textAlign: "center", marginTop: 40 }}>
-                <span className="step" />
-                <span className="step" />
-                <span className="step" />
+                <span className={`step ${currentTab === 1 && "active"} ${currentTab > 1 && "finish"}`} />
+                <span className={`step  ${currentTab === 2 && "active"} ${currentTab > 2 && "finish"}`} />
+                <span className={`step  ${currentTab === 2 && "active"}`} />
               </div>
             </form>
           </div>
@@ -210,6 +210,7 @@ const Register_student = () => {
       <Footer />
       {/* ======= Footer ======= */}
       {/* End Footer */}
+      <div id="preloader" style={{display: `${!loading && "none"}`}}/>
       <a
         href="#"
         className="back-to-top d-flex align-items-center justify-content-center"

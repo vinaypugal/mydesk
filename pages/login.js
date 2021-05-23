@@ -2,7 +2,7 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-const Login = () => {
+const Login = ({loading}) => {
   return (
     <>
       {/* ======= Header ======= */}
@@ -62,7 +62,7 @@ const Login = () => {
       {/* ======= Footer ======= */}
       <Footer />
       {/* End Footer */}
-      
+
       <a
         href="#"
         className="back-to-top d-flex align-items-center justify-content-center"

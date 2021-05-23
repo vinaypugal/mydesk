@@ -1,7 +1,7 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-const Home = () => {
+const Home = ({ loading }) => {
   return (
     <>
       <Header />
@@ -321,8 +321,7 @@ const Home = () => {
       {/* ======= Footer ======= */}
       <Footer />
       {/* End Footer */}
-      {/* <div id="preloader" /> */}
-      
+
       <a
         href="#"
         className="back-to-top d-flex align-items-center justify-content-center"
