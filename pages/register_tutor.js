@@ -2,22 +2,21 @@ import React from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useForm } from "react-hook-form";
-import { useRef } from "react";
 
 const Register_tutor = () => {
-
-
   const {
     register,
     formState: { errors },
     handleSubmit,
     watch,
-  } = useForm();
+  } = useForm({
+    mode: "all",
+    criteriaMode: "all",
+    shouldFocusError: true,
+  });
 
   const onSubmit = (data) => {
-    // e.preventDefault();
     console.log(data);
-    console.log(errors);
   };
 
   return (
@@ -43,13 +42,13 @@ const Register_tutor = () => {
                 </span>
               </div>
               <div className="form-group">
-                {errors.Name?.type === "required" && "Name is required"}
+                {errors.name?.type === "required" && "Name is required"}
                 <input
                   type="text"
                   className="form-control item"
                   id="name"
                   placeholder="Name"
-                  {...register("Name", { required: true })}
+                  {...register("name", { required: true })}
                 />
               </div>
               <div className="form-group">
@@ -63,7 +62,7 @@ const Register_tutor = () => {
                   name="email"
                   {...register("email", {
                     required: true,
-                    pattern: /^\S+@\S+.\S$/i,
+                    pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   })}
                 />
               </div>
@@ -87,6 +86,7 @@ const Register_tutor = () => {
                   type="password"
                   className="form-control item"
                   id="password"
+                  autoComplete
                   placeholder="Password"
                   name="password"
                   {...register("password", { required: true, minLength: 6 })}
@@ -97,7 +97,8 @@ const Register_tutor = () => {
                 <input
                   type="password"
                   className="form-control item"
-                  id="password"
+                  id="cpassword"
+                  autoComplete
                   placeholder="Confirm Password"
                   name="confirmpassword"
                   {...register("confirmpassword", {
@@ -109,13 +110,16 @@ const Register_tutor = () => {
                 />
               </div>
               <div className="form-group">
+                {errors.school && "School name is required"}
                 <input
                   type="text"
                   className="form-control item"
                   id="school"
                   placeholder="School Name"
                   name="school"
-                  {...register("school")}
+                  {...register("school", {
+                    required: true,
+                  })}
                 />
               </div>
               <div className="form-group">

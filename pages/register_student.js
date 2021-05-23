@@ -1,15 +1,49 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { useForm } from "react-hook-form";
 
 const Register_student = ({ loading }) => {
   const [currentTab, setCurrentTab] = useState(1);
 
-  const goNext = () => {
-    setCurrentTab((currentTab) => currentTab + 1);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+    trigger,
+  } = useForm({
+    mode: "all",
+    criteriaMode: "all",
+    shouldFocusError: true,
+  });
+  const goNext = async () => {
+    if (
+      (currentTab === 1
+        ? await trigger([
+            "city",
+            "confirmpassword",
+            "date",
+            "email",
+            "mobile",
+            "name",
+            "parent",
+            "password",
+            "state",
+            "username",
+          ])
+        : await trigger(["school", "board", "class"]))
+    ) {
+      setCurrentTab((currentTab) => currentTab + 1);
+    }
   };
   const goPrev = () => {
     setCurrentTab((currentTab) => currentTab - 1);
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log(errors);
   };
 
   return (
@@ -27,157 +61,242 @@ const Register_student = ({ loading }) => {
         {/* ======= Login Section ======= */}
         <section id="contact" className="contact">
           <div className="registration-form">
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-icon">
                 <span>
                   <i className="icon icon-user" />
                 </span>
               </div>
               {currentTab === 1 && (
-                <form>
-                  <div className="tab" style={{ display: "block" }}>
-                    {" "}
-                    Personal Information <br />
-                    <br />
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control item"
-                        id="name"
-                        placeholder="Name"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="email"
-                        className="form-control item"
-                        id="email"
-                        placeholder="Email"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control item"
-                        id="username"
-                        placeholder="Username"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="password"
-                        className="form-control item"
-                        id="password"
-                        placeholder="Password"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="date"
-                        className="form-control item"
-                        id="dob"
-                        placeholder="Date Of Birth"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control item"
-                        id="city"
-                        placeholder="City of Residence"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control item"
-                        id="state"
-                        placeholder="State"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="number"
-                        className="form-control item"
-                        id="mobile"
-                        placeholder="10 digit mobile number"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="number"
-                        className="form-control item"
-                        id="mobile-parent"
-                        placeholder="Parent Contact Number"
-                      />
-                    </div>
+                <div className="tab" style={{ display: "block" }}>
+                  Personal Information <br />
+                  <br />
+                  <div className="form-group">
+                    {errors.name?.type === "required" && "Name is required"}
+                    <input
+                      type="text"
+                      className="form-control item"
+                      id="name"
+                      placeholder="Name"
+                      {...register("name", { required: true })}
+                    />
                   </div>
-                </form>
+                  <div className="form-group">
+                    {errors.email?.type === "required" && "email is required"}
+                    {errors.email?.type === "pattern" && "email is invalid"}
+                    <input
+                      type="email"
+                      className="form-control item"
+                      id="email"
+                      placeholder="Email"
+                      {...register("email", {
+                        required: true,
+                        pattern:
+                          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    {errors.username && "username is required"}
+                    <input
+                      type="text"
+                      className="form-control item"
+                      id="username"
+                      placeholder="Username"
+                      name="username"
+                      {...register("username", { required: true })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    {errors.password?.type === "required" &&
+                      "Password is required"}
+                    {errors.password?.type === "minLength" &&
+                      "Password minimum length is 6 letters"}
+                    <input
+                      type="password"
+                      className="form-control item"
+                      id="password"
+                      placeholder="Password"
+                      autoComplete
+                      name="password"
+                      {...register("password", {
+                        required: true,
+                        minLength: 6,
+                      })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    {errors.confirmpassword && errors.confirmpassword.message}
+                    <input
+                      type="password"
+                      className="form-control item"
+                      id="cpassword"
+                      autoComplete
+                      placeholder="Confirm Password"
+                      name="confirmpassword"
+                      {...register("confirmpassword", {
+                        required: true,
+                        validate: (value) =>
+                          value === watch("password") ||
+                          "The passwords do not match",
+                      })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    {errors.date && "DOB is required"}
+                    <input
+                      type="date"
+                      className="form-control item"
+                      id="dob"
+                      placeholder="Date Of Birth"
+                      {...register("date", {
+                        required: true,
+                      })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    {errors.city && "City is required"}
+                    <input
+                      type="text"
+                      className="form-control item"
+                      id="city"
+                      placeholder="City of Residence"
+                      {...register("city", {
+                        required: true,
+                      })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    {errors.state && "State is required"}
+                    <input
+                      type="text"
+                      className="form-control item"
+                      id="state"
+                      placeholder="State"
+                      {...register("state", {
+                        required: true,
+                      })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    {errors.mobile && "Mobile number is required"}
+                    <input
+                      type="number"
+                      className="form-control item"
+                      id="mobile"
+                      placeholder="10 digit mobile number"
+                      {...register("mobile", {
+                        required: true,
+                      })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    {errors.parent && "Parent mobile number is required"}
+                    <input
+                      type="number"
+                      className="form-control item"
+                      id="mobile-parent"
+                      placeholder="Parent Contact Number"
+                      {...register("parent", {
+                        required: true,
+                      })}
+                    />
+                  </div>
+                </div>
               )}
               {currentTab === 2 && (
-                <form>
-                  <div className="tab" style={{ display: "block" }}>
-                    {" "}
-                    Educational Information
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control item"
-                        id="school"
-                        placeholder="School"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control item"
-                        id="board"
-                        placeholder="Board"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="number"
-                        className="form-control item"
-                        id="class"
-                        placeholder="Class"
-                      />
-                    </div>
+                <div className="tab" style={{ display: "block" }}>
+                  Educational Information
+                  <div className="form-group">
+                    {errors.school && "School name is required"}
+                    <input
+                      type="text"
+                      className="form-control item"
+                      id="school"
+                      placeholder="School"
+                      {...register("school", {
+                        required: true,
+                      })}
+                    />
                   </div>
-                </form>
+                  <div className="form-group">
+                    {errors.board?.type === "pattern" && "Select a Board"}
+                    <select
+                      type="text"
+                      className="form-select item"
+                      id="board"
+                      placeholder="stateboard/CBSE"
+                      name="board"
+                      {...register("board", {
+                        required: true,
+                        pattern: /(^CBSE$)|(^STATEBOARD$)/,
+                      })}
+                    >
+                      <option selected disabled>
+                        STATE BOARD/CBSE
+                      </option>
+                      <option>STATEBOARD</option>
+                      <option>CBSE</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    {errors.class?.type === "pattern" && "Select a Class"}
+                    <select
+                      className="form-select item"
+                      id="class"
+                      name="class"
+                      {...register("class", {
+                        required: true,
+                        pattern: /^[0-9]*$/,
+                      })}
+                    >
+                      <option selected disabled>
+                        Class - 9/10/11/12
+                      </option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                    </select>
+                  </div>
+                </div>
               )}
               {currentTab === 3 && (
-                <form>
-                  <div className="tab" style={{ display: "block" }}>
-                    Preference
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control item"
-                        id="subject"
-                        placeholder="Subject"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control item"
-                        id="mode"
-                        placeholder="Tuition Mode"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <button
-                        type="button"
-                        className="btn btn-block create-account"
-                      >
-                        Create Account
-                      </button>
-                    </div>
+                <div className="tab" style={{ display: "block" }}>
+                  Preference
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control item"
+                      id="subject"
+                      placeholder="Subject"
+                      {...register("subject", {
+                        required: true,
+                      })}
+                    />
                   </div>
-                </form>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control item"
+                      id="mode"
+                      placeholder="Tuition Mode"
+                      {...register("mode", {
+                        required: true,
+                      })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <button
+                      type="submit"
+                      className="btn btn-block create-account"
+                    >
+                      Create Account
+                    </button>
+                  </div>
+                </div>
               )}
-              <div style={{ overflow: "auto" , display : "block"}}>
+              <div style={{ overflow: "auto", display: "block" }}>
                 <div style={{ float: "right" }}>
                   {currentTab !== 1 && (
                     <button
@@ -195,6 +314,7 @@ const Register_student = ({ loading }) => {
                       className="btn btn-block create-account"
                       id="nextBtn"
                       onClick={goNext}
+                      // disabled = {errors !== null ? true : false}
                     >
                       Next
                     </button>
@@ -223,7 +343,6 @@ const Register_student = ({ loading }) => {
       <Footer />
       {/* ======= Footer ======= */}
       {/* End Footer */}
-      <div id="preloader" style={{ display: `${!loading && "none"}` }} />
       <a
         href="#"
         className="back-to-top d-flex align-items-center justify-content-center"
