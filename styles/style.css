@@ -1132,7 +1132,7 @@ section {
   padding: 50px 0;
 }
 
-.registration-form > div{
+.registration-form > form{
     background-color: #fff;
     max-width: 600px;
     margin: auto;

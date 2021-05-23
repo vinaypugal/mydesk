@@ -27,7 +27,7 @@ const Register_student = ({ loading }) => {
         {/* ======= Login Section ======= */}
         <section id="contact" className="contact">
           <div className="registration-form">
-            <div>
+            <form>
               <div className="form-icon">
                 <span>
                   <i className="icon icon-user" />
@@ -214,7 +214,7 @@ const Register_student = ({ loading }) => {
                 />
                 <span className={`step  ${currentTab === 3 && "active"}`} />
               </div>
-            </div>
+            </form>
           </div>
         </section>
         {/* End Contact Section */}
