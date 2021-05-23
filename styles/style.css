@@ -1155,6 +1155,10 @@ section {
     line-height: 100px;
 }
 
+.registration-form .form-group {
+  color :red
+}
+
 .registration-form .item{
   border-radius: 20px;
     margin-bottom: 25px;
