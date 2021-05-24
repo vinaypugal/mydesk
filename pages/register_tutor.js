@@ -118,13 +118,15 @@ const Register_tutor = () => {
                 />
               </div>
               <div className="form-group">
+                {errors.school?.type === "required" &&
+                  "School name is required"}
                 <input
                   type="text"
                   className="form-control item"
                   id="school"
                   placeholder="School Name"
                   name="school"
-                  {...register("school")}
+                  {...register("school", { required: true })}
                 />
               </div>
               <div className="form-group">
@@ -168,6 +170,7 @@ const Register_tutor = () => {
                 </select>
               </div>
               <div className="form-group">
+                {errors.mobile?.type === "required" && "Enter a mobile number"}
                 {errors.mobile?.type === "pattern" &&
                   "Enter a valid mobile number"}
                 <input
