@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import { useForm } from "react-hook-form";
 
 const Register_student = ({ loading }) => {
-  const [currentTab, setCurrentTab] = useState(3);
+  const [currentTab, setCurrentTab] = useState(1);
   const [focus, setFocus] = useState("text");
 
   const {
@@ -292,7 +292,9 @@ const Register_student = ({ loading }) => {
                     />
                   </div>
                   <div className="form-group">
-                    <h6 style={{color: "#464646"}}className="fw-bold ">Tuition Mode</h6>
+                    <h6 style={{ color: "#464646" }} className="fw-bold ">
+                      Tuition Mode
+                    </h6>
                     {/* <input
                       type="text"
                       className="form-control item"
@@ -304,36 +306,49 @@ const Register_student = ({ loading }) => {
                     /> */}
                     <div className="form-check-inline">
                       <input
-                      // style={{ }}
+                        // style={{ }}
                         className="form-check-input "
                         type="checkbox"
                         id="private"
                         name="private"
                       />
-                      <label className="form-check-label mx-1 mt-1" style={{color: "#464646"}} for="private">
+                      <label
+                        className="form-check-label mx-1 mt-1"
+                        style={{ color: "#464646" }}
+                        for="private"
+                      >
                         Private
                       </label>
                     </div>
                     <div className="form-check-inline">
                       <input
-                      // style={{ }}
+                        // style={{ }}
                         className="form-check-input "
                         type="checkbox"
                         id="regular"
                         name="regular"
                       />
-                      <label className="form-check-label mx-1 mt-1 " style={{color: "#464646"}} for="private">
+                      <label
+                        className="form-check-label mx-1 mt-1 "
+                        style={{ color: "#464646" }}
+                        for="private"
+                      >
                         Regular
                       </label>
-                    </div><div className="form-check-inline">
+                    </div>
+                    <div className="form-check-inline">
                       <input
-                      // style={{ }}
+                        // style={{ }}
                         className="form-check-input "
                         type="checkbox"
                         id="hourly"
                         name="hourly"
                       />
-                      <label className="form-check-label mt-1 mx-1" style={{color: "#464646"}} for="private">
+                      <label
+                        className="form-check-label mt-1 mx-1"
+                        style={{ color: "#464646" }}
+                        for="private"
+                      >
                         Hourly
                       </label>
                     </div>
