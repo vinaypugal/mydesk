@@ -168,11 +168,19 @@ const Register_tutor = () => {
                 </select>
               </div>
               <div className="form-group">
+                {errors.mobile?.type === "pattern" &&
+                  "Enter a valid mobile number"}
                 <input
                   type="number"
                   className="form-control item"
                   id="mobile"
+                  name="mobile"
+                  maxLength="10"
                   placeholder="10 digit mobile number"
+                  {...register("mobile", {
+                    required: true,
+                    pattern: /^[6-9]\d{9}$/,
+                  })}
                 />
               </div>
 

@@ -1189,7 +1189,16 @@ section {
   color: white;
   margin-top: 20px;
 }
-
+/* general webkit */
+.registration-form input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* firefox */
+.registration-form input[type="number"] {
+  -moz-appearance: textfield;
+}
 .registration-form .form-group {
   color: red;
 }
