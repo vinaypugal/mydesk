@@ -2,7 +2,7 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-const Login = ({loading}) => {
+const Login = () => {
   return (
     <>
       {/* ======= Header ======= */}
@@ -48,11 +48,13 @@ const Login = ({loading}) => {
               </div>
               <br />
               <p>Do not have an account?</p> <br />
-              <Link href="/register_student">
+              <Link href="/register_student" >
                 <a> Register Now as Student</a>
               </Link>
               <br />
-              <a href="register_tutor.html"> Register Now as Tutor</a>
+              <Link href="/register_tutor" >
+                <a> Register Now as Tutor</a>
+              </Link>
             </form>
           </div>
         </section>
