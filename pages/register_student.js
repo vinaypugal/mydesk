@@ -70,7 +70,7 @@ const Register_student = ({ loading }) => {
               </div>
               {currentTab === 1 && (
                 <div className="tab" style={{ display: "block" }}>
-                  <h4 className="fw-bold">Personal Information</h4> <br />
+                  <h4 className="fw-bold">Personal Information</h4>
                   <br />
                   <div className="form-group">
                     {errors.name?.type === "required" && "Name is required"}
@@ -220,7 +220,7 @@ const Register_student = ({ loading }) => {
               )}
               {currentTab === 2 && (
                 <div className="tab" style={{ display: "block" }}>
-                  <h4 className="fw-bold mb-5">Educational Information</h4>
+                  <h4 className="fw-bold">Educational Information</h4><br />
                   <div className="form-group">
                     {errors.school && "School name is required"}
                     <input
@@ -277,8 +277,7 @@ const Register_student = ({ loading }) => {
               )}
               {currentTab === 3 && (
                 <div className="tab" style={{ display: "block" }}>
-                  <h4 className="fw-bold mb-5">Preference</h4>
-
+                  <h4 className="fw-bold">Preference</h4><br />
                   <div className="form-group">
                     {errors.subject && "Subject is required"}
                     <input
@@ -295,22 +294,19 @@ const Register_student = ({ loading }) => {
                     <h6 style={{ color: "#464646" }} className="fw-bold ">
                       Tuition Mode
                     </h6>
-                    {/* <input
-                      type="text"
-                      className="form-control item"
-                      id="mode"
-                      placeholder="Tuition Mode"
-                      {...register("mode", {
-                        required: true,
-                      })}
-                    /> */}
+                    <span style={{display : "block"}}>
+                    {errors.mode && "Tuition mode is required"}</span>
+                      
                     <div className="form-check-inline">
                       <input
-                        // style={{ }}
                         className="form-check-input "
                         type="checkbox"
                         id="private"
                         name="private"
+                        value="private"
+                        {...register("mode", {
+                        required: true,
+                      })}
                       />
                       <label
                         className="form-check-label mx-1 mt-1"
@@ -322,11 +318,14 @@ const Register_student = ({ loading }) => {
                     </div>
                     <div className="form-check-inline">
                       <input
-                        // style={{ }}
                         className="form-check-input "
                         type="checkbox"
                         id="regular"
                         name="regular"
+                        value="regular"
+                        {...register("mode", {
+                        required: true,
+                      })}
                       />
                       <label
                         className="form-check-label mx-1 mt-1 "
@@ -338,11 +337,14 @@ const Register_student = ({ loading }) => {
                     </div>
                     <div className="form-check-inline">
                       <input
-                        // style={{ }}
                         className="form-check-input "
                         type="checkbox"
                         id="hourly"
                         name="hourly"
+                        value="hourly"
+                        {...register("mode", {
+                        required: true,
+                      })}
                       />
                       <label
                         className="form-check-label mt-1 mx-1"
