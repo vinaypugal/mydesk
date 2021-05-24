@@ -1146,6 +1146,10 @@ section {
   padding: 50px 0;
 }
 
+.registration-form .form-group select {
+  appearance: menu;
+}
+
 .registration-form > form {
   background-color: #fff;
   max-width: 600px;
@@ -1186,6 +1190,12 @@ section {
   margin-top: 20px;
 }
 
+.registration-form .form-group {
+  color: red;
+}
+.registration-form .form-group input {
+  margin-top: 0.5rem;
+}
 .registration-form .social-media {
   max-width: 600px;
   background-color: #fff;

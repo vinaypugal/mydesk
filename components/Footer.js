@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-md-6 footer-contact">
-              <h3>DREAM-TUTOR</h3>
+              <h3>MY-DESK</h3>
               <br />
               <strong>Phone:</strong> +1 5589 55488 55
               <br />
@@ -76,9 +76,9 @@ const Footer = () => {
       <div className="container d-md-flex py-4">
         <div className="me-md-auto text-center text-md-start">
           <div className="copyright">
-            © Copyright{" "}
+            &copy; Copyright
             <strong>
-              <span>DREAM - TUTOR</span>
+              <span> MY-DESK </span>
             </strong>
             . All Rights Reserved
           </div>
