@@ -179,26 +179,33 @@ const Register_student = ({ loading }) => {
                     />
                   </div>
                   <div className="form-group">
-                    {errors.mobile && "Mobile number is required"}
+                    {errors.mobile?.type === "pattern" &&
+                      "Enter a valid mobile number"}
                     <input
                       type="number"
                       className="form-control item"
                       id="mobile"
+                      name="mobile"
+                      maxLength="10"
                       placeholder="10 digit mobile number"
                       {...register("mobile", {
                         required: true,
+                        pattern: /^[6-9]\d{9}$/,
                       })}
                     />
                   </div>
                   <div className="form-group">
-                    {errors.parent && "Parent mobile number is required"}
+                    {errors.parent?.type === "pattern" &&
+                      "Enter a valid mobile number"}
                     <input
                       type="number"
                       className="form-control item"
                       id="mobile-parent"
+                      maxLength="10"
                       placeholder="Parent Contact Number"
                       {...register("parent", {
                         required: true,
+                        pattern: /^[6-9]\d{9}$/,
                       })}
                     />
                   </div>

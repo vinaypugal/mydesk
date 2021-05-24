@@ -52,9 +52,11 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <a className={router.pathname === "/contact" && "active"}>
-                Contact
-              </a>
+              <Link href="/contact">
+                <a className={router.pathname === "/contact" && "active"}>
+                  Contact
+                </a>
+              </Link>
             </li>
           </ul>
           <i
