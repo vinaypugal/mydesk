@@ -8,11 +8,15 @@ const Register_tutor = () => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+    watch,
+  } = useForm({
+    mode: "all",
+    criteriaMode: "all",
+    shouldFocusError: true,
+  });
+
   const onSubmit = (data) => {
-    // e.preventDefault();
     console.log(data);
-    console.log(errors);
   };
 
   return (
@@ -39,6 +43,7 @@ const Register_tutor = () => {
               </div>
               <div className="form-group">
                 {errors.Name?.type === "required" && "Name is required"}
+                {errors.name?.type === "required" && "Name is required"}
                 <input
                   type="text"
                   className="form-control item"
@@ -58,7 +63,8 @@ const Register_tutor = () => {
                   name="email"
                   {...register("email", {
                     required: true,
-                    pattern: /^\S+@\S+.\S$/i,
+                    pattern:
+                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   })}
                 />
               </div>
@@ -75,16 +81,9 @@ const Register_tutor = () => {
                 />
               </div>
               <div className="form-group">
-                <span
-                  style={{
-                    color: "red",
-                  }}
-                >
-                  {errors.password?.type === "required" &&
-                    "Password is required"}
-                  {errors.password?.type === "minLength" &&
-                    "Password minimum length is 6 letters"}
-                </span>
+                {errors.password?.type === "required" && "Password is required"}
+                {errors.password?.type === "minLength" &&
+                  "Password minimum length is 6 letters"}
                 <input
                   type="password"
                   className="form-control item"
