@@ -4,7 +4,8 @@ import Header from "../components/Header";
 import { useForm } from "react-hook-form";
 
 const Register_student = ({ loading }) => {
-  const [currentTab, setCurrentTab] = useState(1);
+  const [currentTab, setCurrentTab] = useState(3);
+  const [focus, setFocus] = useState("text");
 
   const {
     register,
@@ -69,7 +70,7 @@ const Register_student = ({ loading }) => {
               </div>
               {currentTab === 1 && (
                 <div className="tab" style={{ display: "block" }}>
-                  Personal Information <br />
+                  <h4 className="fw-bold">Personal Information</h4> <br />
                   <br />
                   <div className="form-group">
                     {errors.name?.type === "required" && "Name is required"}
@@ -82,8 +83,8 @@ const Register_student = ({ loading }) => {
                     />
                   </div>
                   <div className="form-group">
-                    {errors.email?.type === "required" && "email is required"}
-                    {errors.email?.type === "pattern" && "email is invalid"}
+                    {errors.email?.type === "required" && "Email is required"}
+                    {errors.email?.type === "pattern" && "Email is invalid"}
                     <input
                       type="email"
                       className="form-control item"
@@ -97,7 +98,7 @@ const Register_student = ({ loading }) => {
                     />
                   </div>
                   <div className="form-group">
-                    {errors.username && "username is required"}
+                    {errors.username && "Username is required"}
                     <input
                       type="text"
                       className="form-control item"
@@ -145,9 +146,11 @@ const Register_student = ({ loading }) => {
                   <div className="form-group">
                     {errors.date && "DOB is required"}
                     <input
-                      type="date"
+                      type={focus}
+                      onBlur={() => setFocus("text")}
                       className="form-control item"
                       id="dob"
+                      onFocus={() => setFocus("date")}
                       placeholder="Date Of Birth"
                       {...register("date", {
                         required: true,
@@ -179,6 +182,8 @@ const Register_student = ({ loading }) => {
                     />
                   </div>
                   <div className="form-group">
+                    {errors.mobile?.type === "required" &&
+                      "Mobile number is required"}
                     {errors.mobile?.type === "pattern" &&
                       "Enter a valid mobile number"}
                     <input
@@ -195,6 +200,8 @@ const Register_student = ({ loading }) => {
                     />
                   </div>
                   <div className="form-group">
+                    {errors.parent?.type === "required" &&
+                      "Parent mobile number is required"}
                     {errors.parent?.type === "pattern" &&
                       "Enter a valid mobile number"}
                     <input
@@ -213,7 +220,7 @@ const Register_student = ({ loading }) => {
               )}
               {currentTab === 2 && (
                 <div className="tab" style={{ display: "block" }}>
-                  Educational Information
+                  <h4 className="fw-bold mb-5">Educational Information</h4>
                   <div className="form-group">
                     {errors.school && "School name is required"}
                     <input
@@ -247,7 +254,7 @@ const Register_student = ({ loading }) => {
                     </select>
                   </div>
                   <div className="form-group">
-                    {errors.class?.type === "pattern" && "Select a Class"}
+                    {errors.class?.type === "pattern" && "Select a class"}
                     <select
                       className="form-select item"
                       id="class"
@@ -270,8 +277,10 @@ const Register_student = ({ loading }) => {
               )}
               {currentTab === 3 && (
                 <div className="tab" style={{ display: "block" }}>
-                  Preference
+                  <h4 className="fw-bold mb-5">Preference</h4>
+
                   <div className="form-group">
+                    {errors.subject && "Subject is required"}
                     <input
                       type="text"
                       className="form-control item"
@@ -283,7 +292,8 @@ const Register_student = ({ loading }) => {
                     />
                   </div>
                   <div className="form-group">
-                    <input
+                    <h6 style={{color: "#464646"}}className="fw-bold ">Tuition Mode</h6>
+                    {/* <input
                       type="text"
                       className="form-control item"
                       id="mode"
@@ -291,7 +301,42 @@ const Register_student = ({ loading }) => {
                       {...register("mode", {
                         required: true,
                       })}
-                    />
+                    /> */}
+                    <div className="form-check-inline">
+                      <input
+                      // style={{ }}
+                        className="form-check-input "
+                        type="checkbox"
+                        id="private"
+                        name="private"
+                      />
+                      <label className="form-check-label mx-1 mt-1" style={{color: "#464646"}} for="private">
+                        Private
+                      </label>
+                    </div>
+                    <div className="form-check-inline">
+                      <input
+                      // style={{ }}
+                        className="form-check-input "
+                        type="checkbox"
+                        id="regular"
+                        name="regular"
+                      />
+                      <label className="form-check-label mx-1 mt-1 " style={{color: "#464646"}} for="private">
+                        Regular
+                      </label>
+                    </div><div className="form-check-inline">
+                      <input
+                      // style={{ }}
+                        className="form-check-input "
+                        type="checkbox"
+                        id="hourly"
+                        name="hourly"
+                      />
+                      <label className="form-check-label mt-1 mx-1" style={{color: "#464646"}} for="private">
+                        Hourly
+                      </label>
+                    </div>
                   </div>
                   <div className="form-group">
                     <button
@@ -303,12 +348,12 @@ const Register_student = ({ loading }) => {
                   </div>
                 </div>
               )}
-              <div style={{ overflow: "auto", display: "block" }}>
+              <div style={{ overflow: "auto", height: "5rem" }}>
                 <div style={{ float: "right" }}>
                   {currentTab !== 1 && (
                     <button
                       type="button"
-                      className="btn btn-block create-account"
+                      className="btn btn-block create-account mx-2"
                       id="prevBtn"
                       onClick={goPrev}
                     >
@@ -318,7 +363,7 @@ const Register_student = ({ loading }) => {
                   {currentTab !== 3 && (
                     <button
                       type="button"
-                      className="btn btn-block create-account"
+                      className="btn btn-block create-account mx-1"
                       id="nextBtn"
                       onClick={goNext}
                       // disabled = {errors !== null ? true : false}

@@ -1149,6 +1149,9 @@ section {
 .registration-form .form-group select {
   appearance: menu;
 }
+.registration-form input:checked {
+  background-color: #4fb2bf;
+}
 
 .registration-form > form {
   background-color: #fff;
