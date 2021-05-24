@@ -42,13 +42,14 @@ const Register_tutor = () => {
                 </span>
               </div>
               <div className="form-group">
+                {errors.Name?.type === "required" && "Name is required"}
                 {errors.name?.type === "required" && "Name is required"}
                 <input
                   type="text"
                   className="form-control item"
                   id="name"
                   placeholder="Name"
-                  {...register("name", { required: true })}
+                  {...register("Name", { required: true })}
                 />
               </div>
               <div className="form-group">
@@ -62,7 +63,8 @@ const Register_tutor = () => {
                   name="email"
                   {...register("email", {
                     required: true,
-                    pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    pattern:
+                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   })}
                 />
               </div>
@@ -86,40 +88,43 @@ const Register_tutor = () => {
                   type="password"
                   className="form-control item"
                   id="password"
-                  autoComplete
                   placeholder="Password"
                   name="password"
                   {...register("password", { required: true, minLength: 6 })}
                 />
               </div>
               <div className="form-group">
-                {errors.confirmpassword && errors.confirmpassword.message}
+                <span
+                  style={{
+                    color: "red",
+                  }}
+                >
+                  {errors.password?.type === "validate" &&
+                    "The password doesnt match"}
+                  {errors.password?.type === "minLength" &&
+                    "Password minimum length is 6 letters"}
+                </span>
                 <input
                   type="password"
                   className="form-control item"
-                  id="cpassword"
-                  autoComplete
+                  id="password"
                   placeholder="Confirm Password"
                   name="confirmpassword"
                   {...register("confirmpassword", {
                     required: true,
-                    validate: (value) =>
-                      value === watch("password") ||
-                      "The passwords do not match",
+                    minLength: 6,
+                    validate: (value) => value === watch("password"),
                   })}
                 />
               </div>
               <div className="form-group">
-                {errors.school && "School name is required"}
                 <input
                   type="text"
                   className="form-control item"
                   id="school"
                   placeholder="School Name"
                   name="school"
-                  {...register("school", {
-                    required: true,
-                  })}
+                  {...register("school")}
                 />
               </div>
               <div className="form-group">

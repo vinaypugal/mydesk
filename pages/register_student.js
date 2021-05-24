@@ -19,7 +19,7 @@ const Register_student = ({ loading }) => {
   });
   const goNext = async () => {
     if (
-      (currentTab === 1
+      currentTab === 1
         ? await trigger([
             "city",
             "confirmpassword",
@@ -32,7 +32,7 @@ const Register_student = ({ loading }) => {
             "state",
             "username",
           ])
-        : await trigger(["school", "board", "class"]))
+        : await trigger(["school", "board", "class"])
     ) {
       setCurrentTab((currentTab) => currentTab + 1);
     }
@@ -43,7 +43,7 @@ const Register_student = ({ loading }) => {
 
   const onSubmit = (data) => {
     console.log(data);
-    console.log(errors);
+    // console.log(errors);
   };
 
   return (
