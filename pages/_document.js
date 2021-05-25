@@ -11,6 +11,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet"></link>
+        <meta name="theme-color" content="#9AD3DA" />
         </Head>
         <body>
           <Main />
