@@ -1167,10 +1167,6 @@ section {
   animation: inAnimation 600ms ease-in;
 }
 
-.registration-form .tab .form-group > input{
-  transition: all 1s ease-in;
-}
-
 @keyframes inAnimation {
   0% {
     opacity: 0;
