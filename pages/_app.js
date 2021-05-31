@@ -4,7 +4,7 @@ import { RecoilRoot } from "recoil";
 import Loading from "../components/Loading";
 import "../styles/opensans.css";
 import "../styles/style.css";
-
+import { UserProvider } from "@auth0/nextjs-auth0";
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   Router.events.on("routeChangeStart", (url) => {
@@ -16,9 +16,11 @@ function MyApp({ Component, pageProps }) {
   });
 
   return (
-    <RecoilRoot>
-      {loading ? <Loading /> : <Component {...pageProps} />}
-    </RecoilRoot>
+    <UserProvider>
+      <RecoilRoot>
+        {loading ? <Loading /> : <Component {...pageProps} />}
+      </RecoilRoot>
+    </UserProvider>
   );
 }
 

@@ -47,10 +47,16 @@ const Header = () => {
             </li>
 
             <li>
-              <Link href="/login">
-                <a className={isSign && "active"}>Sign In/Register </a>
+              <Link href="/api/auth/login">
+                <a className={isSign && "active"}> Sign In/Register </a>
               </Link>
             </li>
+            <li>
+              <Link href="/api/auth/logout">
+                <a>Logout </a>
+              </Link>
+            </li>
+
             <li>
               <Link href="/contact">
                 <a className={router.pathname === "/contact" && "active"}>
