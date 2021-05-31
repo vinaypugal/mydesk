@@ -6,7 +6,23 @@ const handler = nc();
 handler.use(connectDB);
 
 handler.get(async(req, res) => {
-  let doc = await User.find()
+  const { name, email, password } = {name:"shriram" , email:"mama@mama.com" , password:"mama"};
+    if (name && email && password) {
+        try {
+          var user = new User({
+            name,
+            email,
+            password,
+          });
+          var usercreated = await user.save();
+          return res.status(200).send(usercreated);
+        } catch (error) {
+          return res.status(500).send(error.message);
+        }
+      } else {
+        res.status(422).send('data_incomplete');
+      }
+  let doc = await User.findOne()
   res.json(doc);
 });
 
