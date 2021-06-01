@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 let Schema = mongoose.Schema;
 
-let student = new Schema({
+let tutor = new Schema({
   name: {
     type: String,
     required: true,
@@ -11,46 +11,35 @@ let student = new Schema({
     required: true,
     unique: true,
   },
-  dob: {
-    type: Date,
-    required: true,
-  },
   since: {
     type: Date,
     default: Date.now,
   },
   board: {
     type: String,
-    required: true,
   },
   class: {
     type: String,
-    required: true,
   },
-  schoolname: {
+  Mode: {
     type: String,
-    required: true,
   },
-  city: {
+  subject: {
     type: String,
-    required: true,
   },
   state: {
     type: String,
-    required: true,
+  },
+  city: {
+    type: String,
   },
   mobile: {
     type: Number,
-    required: true,
-  },
-  parentmobile: {
-    type: Number,
-    required: true,
   },
 });
 
 mongoose.models = {};
 
-let Student = mongoose.model("Student", student);
+let Tutor = mongoose.model("Tutor", tutor);
 
-export default Student;
+export default Tutor;
