@@ -32,7 +32,11 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <a className={router.pathname === "/about" && "active"}>About</a>
+              <Link href="/about">
+                <a className={router.pathname === "/about" && "active"}>
+                  About
+                </a>
+              </Link>
             </li>
             <li>
               <Link href="/courses">
@@ -42,7 +46,9 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <a className={router.pathname === "/" && "faq"}>FAQ</a>
+              <Link href="/faq">
+                <a className={router.pathname === "/faq" && "active"}>FAQ</a>
+              </Link>
             </li>
             {!user && (
               <li>
@@ -81,13 +87,15 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                  <Link href="/student/profile">
+                    <a>
                       My Profile
                       <i
                         style={{ fontSize: "20px" }}
                         className="bx bx-user"
                       ></i>
                     </a>
+                  </Link>
                   </li>
                 </ul>
               </li>

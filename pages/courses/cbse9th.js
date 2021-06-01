@@ -21,7 +21,7 @@ const cbse9th = () => {
                 <div className="col-lg-8">
                   <img
                     style={{ width: 700, height: 350 }}
-                    src="assets/img/course1.png"
+                    src="../assets/img/course1.png"
                     className="img-fluid"
                     alt=""
                   />
@@ -106,7 +106,7 @@ const cbse9th = () => {
                 <div className="col-lg-8">
                   <img
                     style={{ width: 700, height: 350 }}
-                    src="assets/img/course1.png"
+                    src="../assets/img/course1.png"
                     className="img-fluid"
                     alt
                   />

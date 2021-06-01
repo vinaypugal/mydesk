@@ -23,7 +23,7 @@ const state9th = () => {
                 <div className="col-lg-8">
                   <img
                     style={{ width: 700, height: 350 }}
-                    src="assets/img/course1.png"
+                    src="../assets/img/course1.png"
                     className="img-fluid"
                     alt
                   />
@@ -71,7 +71,7 @@ const state9th = () => {
                           id="subject"
                           defaultValue="Mathematics"
                         />
-                      </div>{" "}
+                      </div>
                       <br />
                       <div className="form-group">
                         Preferred Mode: <br />
@@ -108,7 +108,7 @@ const state9th = () => {
                 <div className="col-lg-8">
                   <img
                     style={{ width: 700, height: 350 }}
-                    src="assets/img/course1.png"
+                    src="../assets/img/course1.png"
                     className="img-fluid"
                     alt
                   />
