@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-var user = new Schema({
+let student = new Schema({
   name: {
     type: String,
     required: true
@@ -22,6 +22,6 @@ var user = new Schema({
 
 mongoose.models = {};
 
-let User = mongoose.model('User', user);
+let Student = mongoose.model('Student', student);
 
-export default User;
+export default Student;
