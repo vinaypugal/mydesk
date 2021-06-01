@@ -63,9 +63,10 @@ const Header = () => {
                 </a>
               </Link>
             </li>
-          <li className="dropdown" >
-            <a href="#">
-              <span>My Account</span>
+            {user && 
+          <li className="dropdown">
+            <a href="#" >
+              <span>{user.name}</span>
             </a>
             <ul>
               <li>
@@ -82,6 +83,7 @@ const Header = () => {
               </li>
             </ul>
           </li>
+            }
           </ul>
           <i
             className={`bi ${mobile ? "bi-x" : "bi-list"} mobile-nav-toggle`}
