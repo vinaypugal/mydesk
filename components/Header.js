@@ -35,9 +35,11 @@ const Header = () => {
               <a className={router.pathname === "/about" && "active"}>About</a>
             </li>
             <li>
-              <a className={router.pathname === "/courses" && "active"}>
-                Courses
-              </a>
+              <Link href="/courses">
+                <a className={router.pathname === "/courses" && "active"}>
+                  Courses
+                </a>
+              </Link>
             </li>
             <li>
               <a className={router.pathname === "/" && "faq"}>FAQ</a>
@@ -63,27 +65,33 @@ const Header = () => {
                 </a>
               </Link>
             </li>
-            {user && 
-          <li className="dropdown">
-            <a href="#" >
-              <span>{user.name}</span>
-            </a>
-            <ul>
-              <li>
+            {user && (
+              <li className="dropdown">
                 <a href="#">
-                  Dashboard
-                  <i style={{ fontSize: "20px" }} className="bx bx-medal"></i>
+                  <span>{user.name}</span>
                 </a>
+                <ul>
+                  <li>
+                    <a href="#">
+                      Dashboard
+                      <i
+                        style={{ fontSize: "20px" }}
+                        className="bx bx-medal"
+                      ></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      My Profile
+                      <i
+                        style={{ fontSize: "20px" }}
+                        className="bx bx-user"
+                      ></i>
+                    </a>
+                  </li>
+                </ul>
               </li>
-              <li>
-                <a href="#">
-                  My Profile
-                  <i style={{ fontSize: "20px" }} className="bx bx-user"></i>
-                </a>
-              </li>
-            </ul>
-          </li>
-            }
+            )}
           </ul>
           <i
             className={`bi ${mobile ? "bi-x" : "bi-list"} mobile-nav-toggle`}
