@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 let Schema = mongoose.Schema;
 
 let tutor = new Schema({
-  name: {
+  auth0: {
+    type: String,
+    required: true,
+  },
+  username: {
     type: String,
     required: true,
   },
@@ -11,30 +15,9 @@ let tutor = new Schema({
     required: true,
     unique: true,
   },
-  since: {
-    type: Date,
-    default: Date.now,
-  },
-  board: {
-    type: String,
-  },
-  class: {
-    type: String,
-  },
-  Mode: {
-    type: String,
-  },
-  subject: {
-    type: String,
-  },
-  state: {
-    type: String,
-  },
-  city: {
-    type: String,
-  },
-  mobile: {
-    type: Number,
+  profile: {
+    type: mongoose.Types.ObjectId,
+    ref: "Tutorprofile",
   },
 });
 
