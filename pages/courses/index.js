@@ -38,7 +38,7 @@ const Courses = () => {
                     <div className="d-flex justify-content-between align-items-center mb-3">
                       <h3>Class 9</h3>
                     </div>
-                    <Link href="/courses/state9th">
+                    <Link href="/courses/subjects">
                       <a>
                         View More
                         <i className="bx bx-link" />
