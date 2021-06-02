@@ -1,11 +1,22 @@
+import { UserProvider } from "@auth0/nextjs-auth0";
+import Aos from "aos";
 import { Router } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
 import Loading from "../components/Loading";
 import "../styles/opensans.css";
 import "../styles/style.css";
-import { UserProvider } from "@auth0/nextjs-auth0";
+
 function MyApp({ Component, pageProps }) {
+
+  useEffect(() => {
+    Aos.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
+      mirror: false,
+    });
+  }, []);
   const [loading, setLoading] = useState(false);
   Router.events.on("routeChangeStart", (url) => {
     setLoading(true);
