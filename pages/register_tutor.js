@@ -27,8 +27,7 @@ const Register_tutor = () => {
         {/* ======= Breadcrumbs ======= */}
         <div className="breadcrumbs" data-aos="fade-in">
           <div className="container">
-            <h2>Register as a Tutor</h2>
-            <p>Kindly provide the below mentioned details</p>
+            <h2>Account profile</h2>
           </div>
         </div>
         {/* End Breadcrumbs */}
@@ -53,71 +52,78 @@ const Register_tutor = () => {
                 />
               </div>
               <div className="form-group">
-                {errors.email?.type === "required" && "email is required"}
-                {errors.email?.type === "pattern" && "email is invalid"}
-                <input
-                  type="email"
-                  className="form-control item"
-                  id="email"
-                  placeholder="Email"
-                  name="email"
-                  {...register("email", {
-                    required: true,
-                    pattern:
-                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  })}
-                />
-              </div>
-              <div className="form-group">
-                {errors.username && "username is required"}
-
+                {errors.city && "City is required"}
                 <input
                   type="text"
                   className="form-control item"
-                  id="username"
-                  placeholder="Username"
-                  name="username"
-                  {...register("username", { required: true })}
-                />
-              </div>
-              <div className="form-group">
-                {errors.password?.type === "required" && "Password is required"}
-                {errors.password?.type === "minLength" &&
-                  "Password minimum length is 6 letters"}
-                <input
-                  type="password"
-                  className="form-control item"
-                  id="password"
-                  placeholder="Password"
-                  name="password"
-                  {...register("password", { required: true, minLength: 6 })}
-                />
-              </div>
-              <div className="form-group">
-                <span
-                  style={{
-                    color: "red",
-                  }}
-                >
-                  {errors.password?.type === "validate" &&
-                    "The password doesnt match"}
-                  {errors.password?.type === "minLength" &&
-                    "Password minimum length is 6 letters"}
-                </span>
-                <input
-                  type="password"
-                  className="form-control item"
-                  id="password"
-                  placeholder="Confirm Password"
-                  name="confirmpassword"
-                  {...register("confirmpassword", {
+                  id="city"
+                  placeholder="City of Residence"
+                  {...register("city", {
                     required: true,
-                    minLength: 6,
-                    validate: (value) => value === watch("password"),
                   })}
                 />
               </div>
               <div className="form-group">
+                {errors.state && "State is required"}
+                <select
+                  className="form-select item"
+                  id="state"
+                  name="state"
+                  placeholder="State"
+                  required
+                  {...register("state", {
+                    required: true,
+                    pattern: /^(?!(Select a state))/,
+                  })}
+                >
+                  <option selected disabled>
+                    Select a state
+                  </option>
+                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                  <option value="Andaman and Nicobar Islands">
+                    {" "}
+                    Andaman and Nicobar Islands
+                  </option>
+                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                  <option value="Assam">Assam</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Chhattisgarh">Chhattisgarh</option>
+                  <option value="Dadar and Nagar Haveli">
+                    Dadar and Nagar Haveli
+                  </option>
+                  <option value="Daman and Diu">Daman and Diu</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Lakshadweep">Lakshadweep</option>
+                  <option value="Puducherry">Puducherry</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Gujarat">Gujarat</option>
+                  <option value="Haryana">Haryana</option>
+                  <option value="Himachal Pradesh">Himachal Pradesh</option>
+                  <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                  <option value="Jharkhand">Jharkhand</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Madhya Pradesh">Madhya Pradesh</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Manipur">Manipur</option>
+                  <option value="Meghalaya">Meghalaya</option>
+                  <option value="Mizoram">Mizoram</option>
+                  <option value="Nagaland">Nagaland</option>
+                  <option value="Odisha">Odisha</option>
+                  <option value="Punjab">Punjab</option>
+                  <option value="Rajasthan">Rajasthan</option>
+                  <option value="Sikkim">Sikkim</option>
+                  <option value="Tamil Nadu">Tamil Nadu</option>
+                  <option value="Telangana">Telangana</option>
+                  <option value="Tripura">Tripura</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="Uttarakhand">Uttarakhand</option>
+                  <option value="West Bengal">West Bengal</option>
+                </select>
+              </div>
+
+              {/* <div className="form-group">
                 {errors.school?.type === "required" &&
                   "School name is required"}
                 <input
@@ -128,7 +134,7 @@ const Register_tutor = () => {
                   name="school"
                   {...register("school", { required: true })}
                 />
-              </div>
+              </div> */}
               <div className="form-group">
                 {errors.class?.type === "pattern" && "Select a Class"}
                 <select
@@ -189,7 +195,7 @@ const Register_tutor = () => {
 
               <div className="form-group">
                 <button type="submit" className="btn btn-block create-account">
-                  Create Account
+                  Save Details
                 </button>
               </div>
             </form>

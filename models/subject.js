@@ -9,11 +9,7 @@ let subject = new Schema({
   board: {
     type: String,
     required: true,
-  },
-  board: {
-    type: String,
-    required: true,
-    enum: ['cbse', 'state'],
+    enum: ['cbse', 'stateboard'],
   },
   class: {
     type: String,
