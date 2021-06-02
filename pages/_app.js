@@ -8,7 +8,6 @@ import "../styles/opensans.css";
 import "../styles/style.css";
 
 function MyApp({ Component, pageProps }) {
-
   useEffect(() => {
     Aos.init({
       duration: 1000,
@@ -16,7 +15,7 @@ function MyApp({ Component, pageProps }) {
       once: true,
       mirror: false,
     });
-  }, []);
+  });
   const [loading, setLoading] = useState(false);
   Router.events.on("routeChangeStart", (url) => {
     setLoading(true);
