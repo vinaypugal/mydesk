@@ -22,7 +22,7 @@ let studentprofile = new Schema({
   board: {
     type: String,
     required: true,
-    enum: ['cbse', 'state']
+    enum: ['cbse', 'stateboard']
     
   },
   class: {

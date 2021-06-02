@@ -364,8 +364,12 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
 }
 
+.navbar-mobile .dropdown:hover ul {
+  display: inline-block;
+}
+
 .navbar-mobile .dropdown ul li {
-  min-width: 200px;
+  max-width: 50px;
 }
 
 .navbar-mobile .dropdown ul a {
