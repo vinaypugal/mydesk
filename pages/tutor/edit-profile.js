@@ -192,13 +192,7 @@ const EditProfile = () => {
           </form>
         </div>
       </main>
-<<<<<<< HEAD
     </>
-=======
-
-      <Footer />
-    </div>
->>>>>>> 3ee0c8fe7ee9aec8f7499787ddfc453a103b9c00
   );
 };
 
