@@ -2,7 +2,7 @@ import { useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useForm } from "react-hook-form";
-import states from "../states";
+import states from "../utlis/states";
 
 const Register_student = () => {
   // const [currentTab, setCurrentTab] = useState(1);
@@ -103,7 +103,6 @@ const Register_student = () => {
                     id="city"
                     name="city"
                     placeholder="City"
-                    disabled = {!selectedstate}
                     required
                     {...register("city", {
                       required: true,
@@ -113,7 +112,8 @@ const Register_student = () => {
                     <option selected disabled>
                       Select a city
                     </option>
-                    {(selectedstate)&&(selectedstate !== "Select a state") &&
+                    {selectedstate &&
+                      selectedstate !== "Select a state" &&
                       states
                         .find((state) => state.name === selectedstate)
                         .districts.map((city) => (
