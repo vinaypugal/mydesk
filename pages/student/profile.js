@@ -1,11 +1,10 @@
-import Link from "next/link";
 import React from "react";
 import Header from "../../components/Header";
 
 const Profile = () => {
   return (
     <>
-      <Header />
+    <Header/>
       <main id="main">
         <div className="container">
           <div className="main-body">
@@ -24,27 +23,7 @@ const Profile = () => {
                         <p className="text-muted font-size-sm">
                           Velammal School
                         </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-8 mb-8">
-                <div className="card">
-                  <div className="card-body">
-                    <div className="d-flex flex-column align-items-center text-center">
-                      <div className="mt-3">
-                        <h4>Bio</h4>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Mauris nunc arcu, dignissim sit amet
-                          sollicitudin iaculis, vehicula id urna. Sed luctus
-                          urna nunc. Donec fermentum, magna sit amet rutrum
-                          pretium, turpis dolor molestie diam, ut lacinia diam
-                          risus eleifend sapien. Curabitur ac nibh nulla.
-                          Maecenas nec augue placerat, viverra tellus non,
-                          pulvinar risus.
-                        </p>
+                        <p className="text-muted font-size-sm">Stateboard</p>
                       </div>
                     </div>
                   </div>
@@ -67,6 +46,20 @@ const Profile = () => {
                       <div className="col-sm-9 text-secondary">
                         abi@gmail.com
                       </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Subject</h6>
+                      </div>
+                      <div className="col-sm-9 text-secondary">Mathematics</div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Mode</h6>
+                      </div>
+                      <div className="col-sm-9 text-secondary">Regular</div>
                     </div>
                     <hr />
                     <div className="row">
@@ -94,11 +87,12 @@ const Profile = () => {
                     <hr />
                     <div className="row">
                       <div className="col-sm-12">
-                        <Link href="/student/edit-profile">
-                          <a className="btn btn-block default-button">
-                            Edit Profile
-                          </a>
-                        </Link>
+                        <a
+                          className="btn btn-block default-button"
+                          href="edit-profile.html"
+                        >
+                          Edit Profile
+                        </a>
                       </div>
                     </div>
                   </div>
