@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useForm } from "react-hook-form";
-import states from "../states";
+import states from "../utlis/states";
 const Register_tutor = () => {
   const {
     register,
@@ -53,52 +53,52 @@ const Register_tutor = () => {
                 />
               </div>
               <div className="form-group">
-                  {errors.state && "State is required"}
-                  <select
-                    className="form-select item"
-                    id="state"
-                    name="state"
-                    placeholder="State"
-                    required
-                    {...register("state", {
-                      required: true,
-                      pattern: /^(?!(Select a state))/,
-                    })}
-                  >
-                    <option selected disabled>
-                      Select a state
-                    </option>
+                {errors.state && "State is required"}
+                <select
+                  className="form-select item"
+                  id="state"
+                  name="state"
+                  placeholder="State"
+                  required
+                  {...register("state", {
+                    required: true,
+                    pattern: /^(?!(Select a state))/,
+                  })}
+                >
+                  <option selected disabled>
+                    Select a state
+                  </option>
 
-                    {states.map((state) => (
-                      <option value={state.name}>{state.name}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group">
-                  {errors.city && "City is required"}
-                  <select
-                    className="form-select item"
-                    id="city"
-                    name="city"
-                    placeholder="City"
-                    disabled = {!selectedstate}
-                    required
-                    {...register("city", {
-                      required: true,
-                      pattern: /^(?!(Select a city))/,
-                    })}
-                  >
-                    <option selected disabled>
-                      Select a city
-                    </option>
-                    {(selectedstate)&&(selectedstate !== "Select a state") &&
-                      states
-                        .find((state) => state.name === selectedstate)
-                        .districts.map((city) => (
-                          <option value={city.name}>{city.name}</option>
-                        ))}
-                  </select>
-                </div>
+                  {states.map((state) => (
+                    <option value={state.name}>{state.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-group">
+                {errors.city && "City is required"}
+                <select
+                  className="form-select item"
+                  id="city"
+                  name="city"
+                  placeholder="City"
+                  required
+                  {...register("city", {
+                    required: true,
+                    pattern: /^(?!(Select a city))/,
+                  })}
+                >
+                  <option selected disabled>
+                    Select a city
+                  </option>
+                  {selectedstate &&
+                    selectedstate !== "Select a state" &&
+                    states
+                      .find((state) => state.name === selectedstate)
+                      .districts.map((city) => (
+                        <option value={city.name}>{city.name}</option>
+                      ))}
+                </select>
+              </div>
               {/* <div className="form-group">
                 {errors.school?.type === "required" &&
                   "School name is required"}
