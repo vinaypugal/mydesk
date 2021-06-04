@@ -1,4 +1,5 @@
 import axios from "axios";
+import Image from "next/image";
 import React from "react";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
@@ -25,11 +26,12 @@ const subject = ({ data }) => {
                   key={item._id}
                 >
                   <div className="course-item">
-                    <img
-                      style={{ width: 420, height: 200 }}
+                    <Image
                       src={`/assets/img/${item.name}.jpg`}
                       className="img-fluid"
-                      alt="..."
+                      width={420}
+                      height={200}
+                      alt={item.name}
                     />
                     <div className="course-content">
                       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -59,20 +61,20 @@ const subject = ({ data }) => {
 };
 
 export async function getStaticPaths() {
-  let posts =[]
-  const a = ["9","10", "11", "12"]  
-  const b = ["stateboard" , "cbse"] 
-  
-  for (var i of a){
-      for ( var j of b){
-          posts.push([i,j])
-      }
+  let posts = [];
+  const a = ["9", "10", "11", "12"];
+  const b = ["stateboard", "cbse"];
+
+  for (var i of a) {
+    for (var j of b) {
+      posts.push([i, j]);
+    }
   }
   const paths = posts.map((post) => ({
     params: { slug: post },
-  }))
+  }));
 
-  return { paths, fallback: false }
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
