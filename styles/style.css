@@ -418,16 +418,16 @@ h6 {
 #hero {
   width: 100%;
   height: 80vh;
-  background: url("https://www.3playmedia.com/wp-content/uploads/shutterstock_1303716190-1400x1050.png")
-    top center;
-  /* background-color: #54e8fc; */
+  /* background: url("https://www.3playmedia.com/wp-content/uploads/shutterstock_1303716190-1400x1050.png")
+    top center; */
+  background-color: #4FB2BF;
   background-size: cover;
   position: relative;
 }
 
 #hero:before {
   content: "";
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.1);
   position: absolute;
   bottom: 0;
   top: 0;

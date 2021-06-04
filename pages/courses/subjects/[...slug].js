@@ -1,8 +1,10 @@
+import { useRouter } from "next/router";
 import React from "react";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 
 const subject = () => {
+  const router = useRouter();
   return (
     <>
       <Header />
@@ -20,7 +22,7 @@ const subject = () => {
         <div className="row" data-aos="zoom-in" data-aos-delay={100}>
           <div className="col-lg-4 col-md-4 d-flex align-items-stretch">
             <div className="course-item">
-              <img style={{width: 420, height: 200}} src="../assets/img/physics.jpg" className="img-fluid" alt="..." />
+              <img style={{width: 420, height: 200}} src="/assets/img/physics.jpg" className="img-fluid" alt="..." />
               <div className="course-content">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h3>Class 11 - Physics</h3>
@@ -32,7 +34,7 @@ const subject = () => {
           </div> {/* End Course Item*/}
           <div className="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-md-0">
             <div className="course-item">
-              <img style={{width: 420, height: 200}} src="../assets/img/chemistry.jpg" className="img-fluid" alt="..." />
+              <img style={{width: 420, height: 200}} src="/assets/img/chemistry.jpg" className="img-fluid" alt="..." />
               <div className="course-content">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h3>Class 11 - Chemistry</h3>
@@ -44,7 +46,7 @@ const subject = () => {
           </div> {/* End Course Item*/}
           <div className="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-lg-0">
             <div className="course-item">
-              <img style={{width: 420, height: 200}} src="../assets/img/maths.jpg" className="img-fluid" alt="..." />
+              <img style={{width: 420, height: 200}} src="/assets/img/maths.jpg" className="img-fluid" alt="..." />
               <div className="course-content">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h3>Class 11 - Mathematics</h3>
@@ -62,7 +64,7 @@ const subject = () => {
         <div className="row" data-aos="zoom-in" data-aos-delay={100}>
           <div className="col-lg-4 col-md-4 d-flex align-items-stretch">
             <div className="course-item">
-              <img style={{width: 420, height: 200}} src="../assets/img/biology.jpg" className="img-fluid" alt="..." />
+              <img style={{width: 420, height: 200}} src="/assets/img/biology.jpg" className="img-fluid" alt="..." />
               <div className="course-content">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h3>Class 11 - Biology</h3>
@@ -74,7 +76,7 @@ const subject = () => {
           </div> {/* End Course Item*/}
           <div className="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-md-0">
             <div className="course-item">
-              <img style={{width: 420, height: 200}} src="../assets/img/computer.jpg" className="img-fluid" alt="..." />
+              <img style={{width: 420, height: 200}} src="/assets/img/computer.jpg" className="img-fluid" alt="..." />
               <div className="course-content">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h3>Class 11 - Computer Science</h3>
@@ -86,7 +88,7 @@ const subject = () => {
           </div> {/* End Course Item*/}
           <div className="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-md-0">
             <div className="course-item">
-              <img style={{width: 420, height: 200}} src="../assets/img/b-maths.jpg" className="img-fluid" alt="..." />
+              <img style={{width: 420, height: 200}} src="/assets/img/b-maths.jpg" className="img-fluid" alt="..." />
               <div className="course-content">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h3>Class 11 - Business Maths</h3>
@@ -104,7 +106,7 @@ const subject = () => {
         <div className="row" data-aos="zoom-in" data-aos-delay={100}>
           <div className="col-lg-4 col-md-4 d-flex align-items-stretch">
             <div className="course-item">
-              <img style={{width: 420, height: 200}} src="../assets/img/accounts.jpg" className="img-fluid" alt="..." />
+              <img style={{width: 420, height: 200}} src="/assets/img/accounts.jpg" className="img-fluid" alt="..." />
               <div className="course-content">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h3>Class 11 - Accounts</h3>
@@ -116,7 +118,7 @@ const subject = () => {
           </div> {/* End Course Item*/}
           <div className="col-lg-4 col-md-4 d-flex align-items-stretch">
             <div className="course-item">
-              <img style={{width: 420, height: 200}} src="../assets/img/commerce.jpg" className="img-fluid" alt="..." />
+              <img style={{width: 420, height: 200}} src="/assets/img/commerce.jpg" className="img-fluid" alt="..." />
               <div className="course-content">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h3>Class 11 - Commerce</h3>
