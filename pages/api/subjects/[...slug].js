@@ -6,8 +6,8 @@ const handler = nc();
 handler.use(connectDB);
 
 handler.get(async (req, res) => {
-  const a = req.query.slug
-  let doc = await Subject.find({ class: a[0], board: a[1]});
+  const [cls , board] = req.query.slug
+  let doc = await Subject.find({ class:cls , board});
   res.json(doc)
 });
 
