@@ -58,7 +58,24 @@ const subject = ({ data }) => {
   );
 };
 
-export async function getServerSideProps({ params }) {
+export async function getStaticPaths() {
+  let posts =[]
+  const a = ["9","10", "11", "12"]  
+  const b = ["stateboard" , "cbse"] 
+  
+  for (var i of a){
+      for ( var j of b){
+          posts.push([i,j])
+      }
+  }
+  const paths = posts.map((post) => ({
+    params: { slug: post },
+  }))
+
+  return { paths, fallback: false }
+}
+
+export async function getStaticProps({ params }) {
   const [cls, board] = params.slug;
   const res = await axios.get(
     `${process.env.URL}/api/subjects/${cls}/${board}`
@@ -74,4 +91,20 @@ export async function getServerSideProps({ params }) {
   }
   return { props: { data } };
 }
+// export async function getServerSideProps({ params }) {
+//   const [cls, board] = params.slug;
+//   const res = await axios.get(
+//     `${process.env.URL}/api/subjects/${cls}/${board}`
+//   );
+//   const data = await res.data;
+//   if (!data) {
+//     return {
+//       redirect: {
+//         destination: "/courses",
+//         permanent: false,
+//       },
+//     };
+//   }
+//   return { props: { data } };
+// }
 export default subject;
