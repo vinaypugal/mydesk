@@ -7,8 +7,13 @@ handler.use(connectDB);
 
 handler.get(async (req, res) => {
   const [cls , board] = req.query.slug
+  try{
   let doc = await Subject.find({ class:cls , board});
-  res.json(doc)
+  res.status(200).json(doc)
+  }
+  catch{
+    res.status(400).json("cannot fetch")
+  }
 });
 
 export default handler;
