@@ -16,14 +16,11 @@ let tutorprofile = new Schema({
     type: Date,
     default: Date.now,
   },
-  // board: {
-  //   type: String,
-  // },
-  // class: {
-  //   type: String,
-  //   enum: ['9', '10' , '11' , '12'],
-  // },
-  Mode: {
+  bio: {
+    type: String,
+    required: true,
+  },
+  mode: {
     type: String,
     enum: ['regular', 'hourly' , 'private' ]
   },
@@ -33,12 +30,15 @@ let tutorprofile = new Schema({
   }],
   state: {
     type: String,
+    required: true,
   },
   city: {
     type: String,
+    required: true,
   },
   mobile: {
     type: Number,
+    required: true,
   },
 });
 

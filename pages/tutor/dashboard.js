@@ -73,7 +73,7 @@ const dashboard = () => {
                 <div className="course-item">
                   <img
                     style={{ height: "172.53px", width: 259 }}
-                    src="assets/img/course3.jpg"
+                    src="../assets/img/course3.jpg"
                     className="img-fluid"
                     alt="..."
                   />
