@@ -5,14 +5,7 @@ import useSWR from "swr";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 
-const subject = () => {
-  const router = useRouter();
-  if (!router.query || !router.query.slug) {
-    return null;
-  }
-  const [cls, board] = router.query.slug;
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
-  const { data, error } = useSWR(`/api/subjects/${cls}/${board}`, fetcher);
+const subject = ({data}) => {
   return (
     <>
       <Header />
@@ -30,7 +23,7 @@ const subject = () => {
             <div className="row" data-aos="zoom-in" data-aos-delay={100}>
               {data ? (
                 data.map((item) => (
-                  <div className="col-lg-4 col-md-4 d-flex align-items-stretch">
+                  <div className="col-lg-4 col-md-4 d-flex align-items-stretch" key={item._id}>
                     <div className="course-item">
                       <img
                         style={{ width: 420, height: 200 }}
@@ -64,5 +57,12 @@ const subject = () => {
     </>
   );
 };
+
+export async function getServerSideProps({params}) {
+  const [cls , board] = params.slug
+  const res = await axios.get(`${process.env.URL}/api/subjects/${cls}/${board}`)
+  const data = await res.data
+  return { props: { data } , notFound : !data }
+}
 
 export default subject;
