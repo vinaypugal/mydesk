@@ -1,10 +1,11 @@
 import React from "react";
-import Header from "../../components/Header";
+import Header from "@/components/Header";
+import Link from "next/link";
 
 const Profile = () => {
   return (
     <>
-    <Header/>
+      <Header />
       <main id="main">
         <div className="container">
           <div className="main-body">
@@ -87,12 +88,14 @@ const Profile = () => {
                     <hr />
                     <div className="row">
                       <div className="col-sm-12">
-                        <a
-                          className="btn btn-block default-button"
-                          href="edit-profile.html"
-                        >
-                          Edit Profile
-                        </a>
+                        <Link href="/student/edit-profile">
+                          <a
+                            className="btn btn-block default-button"
+                            href="edit-profile.html"
+                          >
+                            Edit Profile
+                          </a>
+                        </Link>
                       </div>
                     </div>
                   </div>

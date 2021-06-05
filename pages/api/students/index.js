@@ -1,6 +1,6 @@
 import nc from "next-connect";
-import connectDB from "../../../middleware/connectDB";
-import Student from "../../../models/student";
+import connectDB from "@/middleware/connectDB";
+import Student from "@/models/student";
 const handler = nc();
 
 handler.use(connectDB);
