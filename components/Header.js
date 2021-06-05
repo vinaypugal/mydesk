@@ -74,11 +74,11 @@ const Header = () => {
             {user && (
               <li className="dropdown">
                 <a href="#">
-                  <span>{user.email}</span>
+                  <span>{user.nickname}</span>
                 </a>
                 <ul>
                   <li>
-                    <a href="#">
+                    <a href="">
                       Dashboard
                       <i
                         style={{ fontSize: "20px" }}
