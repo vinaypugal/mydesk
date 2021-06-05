@@ -15,6 +15,10 @@ let tutor = new Schema({
     required: true,
     unique: true,
   },
+  emailverified: {
+    type: Boolean,
+    required: true,
+  },
   profile: {
     type: mongoose.Types.ObjectId,
     ref: "Tutorprofile",
