@@ -3,7 +3,7 @@ import Aos from "aos";
 import { Router } from "next/router";
 import { useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
-import Loading from "../components/Loading";
+import Loading from "@/components/Loading";
 import "../styles/opensans.css";
 import "../styles/style.css";
 
