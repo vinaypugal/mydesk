@@ -1,9 +1,7 @@
-import React from "react";
-import Footer from "../../components/Footer";
-// import Header from "../components/Header";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import Header from "../../components/Header";
+import React from "react";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 const Courses = () => {
   return (
     <>

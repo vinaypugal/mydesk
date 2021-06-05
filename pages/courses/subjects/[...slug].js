@@ -1,8 +1,8 @@
 import axios from "axios";
 import Image from "next/image";
 import React from "react";
-import Footer from "../../../components/Footer";
-import Header from "../../../components/Header";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 const subject = ({ data }) => {
   return (
