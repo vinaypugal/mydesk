@@ -35,7 +35,7 @@ const Profile = () => {
                   <div className="card-body">
                     <div className="row">
                       <div className="col-sm-3">
-                        <h6 className="mb-0">Full Name</h6>
+                        <h6 className="mb-0">Name</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">Abinaya V</div>
                     </div>
@@ -48,20 +48,7 @@ const Profile = () => {
                         abi@gmail.com
                       </div>
                     </div>
-                    <hr />
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h6 className="mb-0">Subject</h6>
-                      </div>
-                      <div className="col-sm-9 text-secondary">Mathematics</div>
-                    </div>
-                    <hr />
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h6 className="mb-0">Mode</h6>
-                      </div>
-                      <div className="col-sm-9 text-secondary">Regular</div>
-                    </div>
+
                     <hr />
                     <div className="row">
                       <div className="col-sm-3">

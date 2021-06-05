@@ -78,7 +78,7 @@ const Header = () => {
                 </a>
                 <ul>
                   <li>
-                    <a href="#">
+                    <a href="">
                       Dashboard
                       <i
                         style={{ fontSize: "20px" }}

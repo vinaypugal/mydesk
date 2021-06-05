@@ -15,14 +15,10 @@ let tutorprofile = new Schema({
     type: String,
     required: true,
   },
-  mode: {
-    type: String,
-    enum: ['regular', 'hourly' , 'private' ]
+  dob: {
+    type: Date,
+    required: true,
   },
-  subject: [{
-    type: mongoose.Types.ObjectId,
-    ref: "Subject",
-  }],
   state: {
     type: String,
     required: true,
@@ -35,6 +31,14 @@ let tutorprofile = new Schema({
     type: Number,
     required: true,
   },
+  mode: {
+    type: String,
+    enum: ['regular', 'hourly' , 'private' ]
+  },
+  subject: [{
+    type: mongoose.Types.ObjectId,
+    ref: "Subject",
+  }]
 });
 
 mongoose.models = {};

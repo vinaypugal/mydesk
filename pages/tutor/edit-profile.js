@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "@/components/Header";
+import { useForm } from "react-hook-form";
+import states from "@/utils/states";
 
 const EditProfile = () => {
+  const [focus, setFocus] = useState("text");
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+    trigger,
+  } = useForm({
+    mode: "all",
+    criteriaMode: "all",
+    shouldFocusError: true,
+  });
+  const selectedstate = watch("state");
+
+  const onSubmit = (data) => {
+    console.log(data);
+    // console.log(errors);
+  };
   return (
     <>
       <Header />
       <main id="main" style={{ marginTop: "6.25rem" }}>
         <div className="container light-style flex-grow-1 container-p-y">
           <h4 className="font-weight-bold py-3 mb-4">Account settings</h4>
-          <form name="edit-profile-tutor">
+          <form onSubmit={handleSubmit(onSubmit)} name="edit-profile">
             <div className="card overflow-hidden">
               <div className="row no-gutters row-bordered row-border-light">
                 <div className="col-md-3 pt-0">
@@ -19,156 +40,137 @@ const EditProfile = () => {
                       data-toggle="list"
                       href="#account-general"
                     >
-                      General
-                    </a>
-                    <a
-                      style={{ backgroundColor: "#4fb2bf" }}
-                      className="list-group-item list-group-item-action"
-                      data-toggle="list"
-                      href="#account-change-password"
-                    >
-                      Change password
-                    </a>
-                    <a
-                      style={{ backgroundColor: "#4fb2bf" }}
-                      className="list-group-item list-group-item-action"
-                      data-toggle="list"
-                      href="#account-info"
-                    >
-                      Basic Info
+                      Edit Profile
                     </a>
                   </div>
                 </div>
                 <div className="col-md-9">
                   <div className="tab-content">
-                    <div
-                      className="tab-pane fade active show"
-                      id="account-general"
-                    >
+                    <div id="account-general">
                       <hr className="border-light m-0" />
-                      <div className="card-body">
+                      <div className="card-body" style={{ color: "red" }}>
                         <div className="form-group">
-                          <label className="form-label">Name</label>
-                          <input
-                            type="text"
-                            className="form-control mb-1"
-                            name="name"
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label className="form-label">Username</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            name="username"
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label className="form-label">Email</label>
-                          <input
-                            type="text"
-                            className="form-control mb-1"
-                            name="email"
-                            placeholder="abc@mail.com"
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label className="form-label">Degree</label>
-                          <input
-                            type="text"
-                            name="degree"
-                            className="form-control"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="tab-pane fade" id="account-change-password">
-                      <div className="card-body pb-2">
-                        <div className="form-group">
-                          <label className="form-label">Current password</label>
-                          <input
-                            type="password"
-                            name="c_password"
-                            className="form-control"
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label className="form-label">New password</label>
-                          <input
-                            type="password"
-                            name="n_password"
-                            className="form-control"
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label className="form-label">
-                            Repeat new password
+                          <label className="fw-bold form-label text-dark ">
+                            BIO (Not more than 30 words)
                           </label>
-                          <input
-                            type="password"
-                            name="r_password"
-                            className="form-control"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="tab-pane fade" id="account-info">
-                      <div className="card-body pb-2">
-                        <div className="form-group">
-                          <label className="form-label">
-                            Bio (Not more than 30 words)
-                          </label>
+                          <br />
+                          {errors.bio && "Bio is required"}
                           <textarea
                             className="form-control"
-                            name="bio"
-                            rows={5}
-                            defaultValue={
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus."
-                            }
-                          />
+                            rows="2"
+                            {...register("bio", {
+                              required: true,
+                            })}
+                          ></textarea>
                         </div>
                         <div className="form-group">
-                          <label className="form-label">Birthday</label>
-                          <input
-                            type="date"
-                            name="dob"
-                            className="form-control"
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label className="form-label">Area</label>
+                          <label className="fw-bold form-label text-dark ">
+                            Name
+                          </label>
+                          <br />
+                          {errors.name?.type === "required" &&
+                            "Name is required"}
                           <input
                             type="text"
-                            name="area"
-                            className="form-control"
+                            className="form-control mb-1"
+                            id="name"
+                            placeholder="Name"
+                            {...register("name", { required: true })}
                           />
                         </div>
                         <div className="form-group">
-                          <label className="form-label">District</label>
+                          <label className="fw-bold form-label text-dark">
+                            DOB
+                          </label>
+                          <br />
+                          {errors.date && "DOB is required"}
                           <input
-                            type="text"
-                            name="district"
-                            className="form-control"
+                            type={focus}
+                            onBlur={() => setFocus("text")}
+                            className="form-control mb-1"
+                            id="dob"
+                            onFocus={() => setFocus("date")}
+                            placeholder="Date Of Birth"
+                            {...register("date", {
+                              required: true,
+                            })}
                           />
                         </div>
-                      </div>
-                      <hr className="border-light m-0" />
-                      <div className="card-body pb-2">
-                        <h6 className="mb-4">Contacts</h6>
+
                         <div className="form-group">
-                          <label className="form-label">Phone</label>
-                          <input
-                            type="text"
-                            name="phone"
-                            className="form-control"
-                          />
+                          <label className="fw-bold form-label text-dark">
+                            State
+                          </label>
+                          <br />
+                          {errors.state && "State is required"}
+                          <select
+                            className="form-select mb-1"
+                            id="state"
+                            name="state"
+                            placeholder="State"
+                            required
+                            {...register("state", {
+                              required: true,
+                              pattern: /^(?!(Select a state))/,
+                            })}
+                          >
+                            <option selected disabled>
+                              Select a state
+                            </option>
+                            {states.map((state) => (
+                              <option value={state.name}>{state.name}</option>
+                            ))}
+                          </select>
                         </div>
                         <div className="form-group">
-                          <label className="form-label">Linkedin ID</label>
+                          <label className="fw-bold form-label text-dark">
+                            City
+                          </label>
+                          <br />
+                          {errors.city && "City is required"}
+                          <select
+                            className="form-select mb-1"
+                            id="city"
+                            name="city"
+                            placeholder="City"
+                            required
+                            {...register("city", {
+                              required: true,
+                              pattern: /^(?!(Select a city))/,
+                            })}
+                          >
+                            <option selected disabled>
+                              Select a city
+                            </option>
+                            {selectedstate &&
+                              selectedstate !== "Select a state" &&
+                              states
+                                .find((state) => state.name === selectedstate)
+                                .districts.map((city) => (
+                                  <option value={city.name}>{city.name}</option>
+                                ))}
+                          </select>
+                        </div>
+                        <div className="form-group">
+                          <label className="fw-bold form-label text-dark">
+                            Mobile Number
+                          </label>
+                          <br />
+                          {errors.mobile?.type === "required" &&
+                            "Mobile number is required"}
+                          {errors.mobile?.type === "pattern" &&
+                            "Enter a valid mobile number"}
                           <input
-                            type="text"
-                            name="linkedin"
-                            className="form-control"
+                            type="number"
+                            className="form-control mb-1"
+                            id="mobile"
+                            name="mobile"
+                            maxLength="10"
+                            placeholder="10 digit mobile number"
+                            {...register("mobile", {
+                              required: true,
+                              pattern: /^[6-9]\d{9}$/,
+                            })}
                           />
                         </div>
                       </div>
@@ -178,7 +180,7 @@ const EditProfile = () => {
               </div>
             </div>
             <div className="text-right mt-3">
-              <button type="button" className="default-button">
+              <button type="submit" className="default-button">
                 Save changes
               </button>
               &nbsp;

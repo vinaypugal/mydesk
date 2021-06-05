@@ -6,9 +6,8 @@ const handler = nc();
 handler.use(connectDB);
 
 handler.get(async (req, res) => {
-  const subject = req.query.slug
   try{
-  let doc = await Tutor.find().populate('profile');
+  let doc = await Tutor.find();
   res.status(200).json(doc)
   }
   catch{
