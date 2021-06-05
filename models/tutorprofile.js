@@ -11,11 +11,6 @@ let tutorprofile = new Schema({
     type: String,
     required: true,
   },
-  
-  since: {
-    type: Date,
-    default: Date.now,
-  },
   bio: {
     type: String,
     required: true,

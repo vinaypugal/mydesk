@@ -15,10 +15,6 @@ let studentprofile = new Schema({
     type: Date,
     required: true,
   },
-  since: {
-    type: Date,
-    default: Date.now,
-  },
   board: {
     type: String,
     required: true,

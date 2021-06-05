@@ -23,6 +23,10 @@ let student = new Schema({
     type: mongoose.Types.ObjectId,
     ref: "Studentprofile",
   },
+  since: {
+    type: Date,
+    default: Date.now,
+  }
 });
 
 mongoose.models = {};
