@@ -1,27 +1,46 @@
-import React, { useState } from "react";
 import Header from "@/components/Header";
-import { useForm } from "react-hook-form";
 import states from "@/utils/states";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import useCheck from "utils/useCheck";
 
 const EditProfile = () => {
+  const { user } = useUser();
+  const router = useRouter();
+  if (!user) {
+    return null;
+  }
+  useCheck(user, "student");
   const [focus, setFocus] = useState("text");
-
   const {
     register,
     formState: { errors },
     handleSubmit,
     watch,
-    trigger,
   } = useForm({
     mode: "all",
     criteriaMode: "all",
     shouldFocusError: true,
+    defaultValues : {}
   });
   const selectedstate = watch("state");
 
   const onSubmit = (data) => {
-    console.log(data);
-    // console.log(errors);
+    axios({
+      method: "patch",
+      url: "/api/student",
+      data: data,
+    })
+      .then(function (response) {
+        console.log(response);
+        router.replace("/student/profile");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -77,7 +96,7 @@ const EditProfile = () => {
                             id="dob"
                             onFocus={() => setFocus("date")}
                             placeholder="Date Of Birth"
-                            {...register("date", {
+                            {...register("dob", {
                               required: true,
                             })}
                           />
@@ -237,7 +256,7 @@ const EditProfile = () => {
                             id="mobile-parent"
                             maxLength="10"
                             placeholder="Parent Contact Number"
-                            {...register("parent", {
+                            {...register("parentmobile", {
                               required: true,
                               pattern: /^[6-9]\d{9}$/,
                             })}
@@ -267,5 +286,7 @@ const EditProfile = () => {
     </>
   );
 };
+
+export const getServerSideProps = withPageAuthRequired();
 
 export default EditProfile;

@@ -12,7 +12,7 @@ let studentprofile = new Schema({
     required: true,
   },
   dob: {
-    type: Date,
+    type: String,
     required: true,
   },
   board: {
@@ -26,7 +26,7 @@ let studentprofile = new Schema({
     enum: ['9', '10' , '11' , '12'],
     required: true,
   },
-  schoolname: {
+  school: {
     type: String,
     required: true,
   },

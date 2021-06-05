@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { useForm } from "react-hook-form";
 import states from "@/utils/states";
+import axios from "axios";
+import { useRouter } from "next/router";
 const Register_tutor = () => {
+  const [focus, setFocus] = useState("text");
+  const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -14,10 +18,20 @@ const Register_tutor = () => {
     criteriaMode: "all",
     shouldFocusError: true,
   });
-
   const selectedstate = watch("state");
   const onSubmit = (data) => {
-    console.log(data);
+    axios({
+      method: "post",
+      url: "/api/tutor",
+      data: data,
+    })
+      .then(function (response) {
+        router.replace("/tutor/profile");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // console.log(data)
   };
 
   return (
@@ -49,7 +63,21 @@ const Register_tutor = () => {
                   className="form-control item"
                   id="name"
                   placeholder="Name"
-                  {...register("Name", { required: true })}
+                  {...register("name", { required: true })}
+                />
+              </div>
+              <div className="form-group">
+                {errors.date && "DOB is required"}
+                <input
+                  type={focus}
+                  onBlur={() => setFocus("text")}
+                  className="form-control item"
+                  id="dob"
+                  onFocus={() => setFocus("date")}
+                  placeholder="Date Of Birth"
+                  {...register("dob", {
+                    required: true,
+                  })}
                 />
               </div>
               <div className="form-group">
@@ -111,7 +139,7 @@ const Register_tutor = () => {
                   {...register("school", { required: true })}
                 />
               </div> */}
-              <div className="form-group">
+              {/* <div className="form-group">
                 {errors.class?.type === "pattern" && "Select a Class"}
                 <select
                   className="form-select item"
@@ -130,8 +158,8 @@ const Register_tutor = () => {
                   <option>11</option>
                   <option>12</option>
                 </select>
-              </div>
-              <div className="form-group">
+              </div> */}
+              {/* <div className="form-group">
                 {errors.board?.type === "pattern" && "Select a Board"}
                 <select
                   type="text"
@@ -150,6 +178,17 @@ const Register_tutor = () => {
                   <option>STATEBOARD</option>
                   <option>CBSE</option>
                 </select>
+              </div> */}
+              <div className="form-group">
+                {errors.bio && "Bio is required"}
+                <textarea
+                  className="form-control item"
+                  rows="2"
+                  placeholder="Bio (Not more than 30 words)"
+                  {...register("bio", {
+                    required: true,
+                  })}
+                ></textarea>
               </div>
               <div className="form-group">
                 {errors.mobile?.type === "required" && "Enter a mobile number"}
