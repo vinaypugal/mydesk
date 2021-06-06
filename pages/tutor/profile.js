@@ -8,10 +8,10 @@ import useSWR from "swr";
 import useCheck from "utils/useCheck";
 const Profile = () => {
   const { user } = useUser();
-  useCheck(user, "tutor");
   if (!user) {
     return null;
   }
+  useCheck(user, "tutor");
   const fetcher = (url) => axios.get(url).then((res) => res.data);
   const { data, error } = useSWR("/api/tutor", fetcher);
 

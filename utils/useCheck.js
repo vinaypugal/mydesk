@@ -12,7 +12,7 @@ const useCheck = (user, role) => {
       const data = response.data;
       setStatus(data);
     };
-    if (user["https://mydesk.app/roles"] !== role && !user.email_verified) {
+    if (user["https://mydesk.app/roles"] !== role || !user.email_verified) {
       router.replace("/");
     } else {
       check();
