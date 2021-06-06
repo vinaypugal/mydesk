@@ -9,13 +9,13 @@ import useCheck from "utils/useCheck";
 
 const EditProfile = () => {
   const { user } = useUser();
-  useCheck(user, "tutor");
   const router = useRouter();
   if (!user) {
     return null;
   }
+  useCheck(user, "tutor");
   const [focus, setFocus] = useState("text");
-
+  
   const {
     register,
     formState: { errors },
@@ -28,7 +28,7 @@ const EditProfile = () => {
     shouldFocusError: true,
   });
   const selectedstate = watch("state");
-
+  
   const onSubmit = (data) => {
     axios({
       method: "patch",

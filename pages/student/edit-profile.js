@@ -1,19 +1,35 @@
 import Header from "@/components/Header";
+import Loading from "@/components/Loading";
 import states from "@/utils/states";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useCheck from "utils/useCheck";
 
 const EditProfile = () => {
   const { user } = useUser();
-  useCheck(user, "student");
-  const router = useRouter();
   if (!user) {
     return null;
   }
+  useCheck(user, "student");
+  const [formData, setformData] = useState({});
+  useEffect(() => {
+    const fetcher = async () => {
+      const response = await fetch("/api/student");
+      const data = await response.json();
+      console.log(data.profile);
+      setformData(data.profile);
+    };
+    fetcher();
+  }, []);
+  if (!formData) return <Loading />;
+  return <StudentForm formData={formData} />;
+};
+
+const StudentForm = ({ formData }) => {
+  const router = useRouter();
   const [focus, setFocus] = useState("text");
   const {
     register,
@@ -24,7 +40,7 @@ const EditProfile = () => {
     mode: "all",
     criteriaMode: "all",
     shouldFocusError: true,
-    defaultValues : {}
+    defaultValues: { ...formData },
   });
   const selectedstate = watch("state");
 
