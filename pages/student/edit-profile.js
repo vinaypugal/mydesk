@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import states from "@/utils/states";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import axios from "axios";
+import useSWR from "swr";
+import Loading from "components/Loading";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,11 +11,18 @@ import useCheck from "utils/useCheck";
 
 const EditProfile = () => {
   const { user } = useUser();
-  useCheck(user, "student");
+  // useCheck(user, "student");
   const router = useRouter();
   if (!user) {
     return null;
   }
+
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR("/api/student", fetcher);
+
+  if (error) return <h1>failed to load</h1>;
+  if (!data) return <Loading />;
+  console.log(data);
   const [focus, setFocus] = useState("text");
   const {
     register,
@@ -24,7 +33,7 @@ const EditProfile = () => {
     mode: "all",
     criteriaMode: "all",
     shouldFocusError: true,
-    defaultValues : {}
+    defaultValues: {},
   });
   const selectedstate = watch("state");
 
@@ -42,6 +51,7 @@ const EditProfile = () => {
         console.log(error);
       });
   };
+
   return (
     <>
       <Header />
@@ -65,6 +75,7 @@ const EditProfile = () => {
                 </div>
                 <div className="col-md-9">
                   <div className="tab-content">
+                    <input type="hidden" value={data._id}/>
                     <div id="account-general">
                       <hr className="border-light m-0" />
                       <div className="card-body" style={{ color: "red" }}>
@@ -79,6 +90,7 @@ const EditProfile = () => {
                             type="text"
                             className="form-control mb-1"
                             id="name"
+                            value={data.profile.name}
                             placeholder="Name"
                             {...register("name", { required: true })}
                           />
@@ -94,6 +106,7 @@ const EditProfile = () => {
                             onBlur={() => setFocus("text")}
                             className="form-control mb-1"
                             id="dob"
+                            value={data.profile.dob}
                             onFocus={() => setFocus("date")}
                             placeholder="Date Of Birth"
                             {...register("dob", {
@@ -111,6 +124,7 @@ const EditProfile = () => {
                             className="form-select mb-1"
                             id="class"
                             name="class"
+                            value={data.profile.class}
                             {...register("class", {
                               required: true,
                               pattern: /^[0-9]*$/,
@@ -137,6 +151,7 @@ const EditProfile = () => {
                             id="board"
                             placeholder="stateboard/CBSE"
                             name="board"
+                            value={data.profile.board}
                             {...register("board", {
                               required: true,
                               pattern: /(^CBSE$)|(^STATEBOARD$)/,
@@ -159,6 +174,7 @@ const EditProfile = () => {
                             type="text"
                             className="form-control mb-1"
                             id="school"
+                            value={data.profile.school}
                             placeholder="School"
                             {...register("school", {
                               required: true,
@@ -177,6 +193,7 @@ const EditProfile = () => {
                             name="state"
                             placeholder="State"
                             required
+                            value={data.profile.state}
                             {...register("state", {
                               required: true,
                               pattern: /^(?!(Select a state))/,
@@ -201,6 +218,7 @@ const EditProfile = () => {
                             id="city"
                             name="city"
                             placeholder="City"
+                            value={data.profile.city}
                             required
                             {...register("city", {
                               required: true,
@@ -234,6 +252,7 @@ const EditProfile = () => {
                             id="mobile"
                             name="mobile"
                             maxLength="10"
+                            value={data.profile.mobile}
                             placeholder="10 digit mobile number"
                             {...register("mobile", {
                               required: true,
@@ -256,6 +275,7 @@ const EditProfile = () => {
                             id="mobile-parent"
                             maxLength="10"
                             placeholder="Parent Contact Number"
+                            value={data.profile.parentmobile}
                             {...register("parentmobile", {
                               required: true,
                               pattern: /^[6-9]\d{9}$/,

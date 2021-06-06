@@ -9,7 +9,7 @@ import useCheck from "utils/useCheck";
 
 const Profile = () => {
   const { user } = useUser();
-  useCheck(user, "student");
+  // useCheck(user, "student");
   if (!user) {
     return null;
   }
