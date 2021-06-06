@@ -9,11 +9,11 @@ import useCheck from "utils/useCheck";
 
 const EditProfile = () => {
   const { user } = useUser();
+  useCheck(user, "tutor");
   const router = useRouter();
   if (!user) {
     return null;
   }
-  useCheck(user, "tutor");
   const [focus, setFocus] = useState("text");
 
   const {

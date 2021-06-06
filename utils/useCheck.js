@@ -16,9 +16,15 @@ const useCheck = (user, role) => {
       router.replace("/");
     } else {
       check();
-      if (status === "create") {
-        router.replace(`/register_${role}`);
+      if (status === "denied"){
+        router.replace(`/`)
       }
+      else if (status === "mail") {
+        router.replace(`/mail`);
+      } 
+      else if (status === "create") {
+        router.replace(`/register_${role}`);
+      } 
     }
   },[status]);
 };

@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import axios from "axios";
 import Loading from "components/Loading";
 import Link from "next/link";
 import React from "react";
@@ -8,11 +9,11 @@ import useCheck from "utils/useCheck";
 
 const Profile = () => {
   const { user } = useUser();
+  useCheck(user, "student");
   if (!user) {
     return null;
   }
-  useCheck(user, "student");
-  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
   const { data, error } = useSWR("/api/student", fetcher);
 
   if (error) return <h1>failed to load</h1>;

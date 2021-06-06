@@ -17,6 +17,8 @@ handler.get(async (req, res) => {
   }
   if (user.profile) {
     res.status(200).send("ok");
+  } else if (!token.user.emailverified) {
+    res.status(200).send("mail");
   } else if (user) {
     res.status(200).send("create");
   } else {

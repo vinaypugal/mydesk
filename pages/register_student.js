@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { useForm } from "react-hook-form";
@@ -7,10 +7,19 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const Register_student = () => {
-  // const [currentTab, setCurrentTab] = useState(1);
+  useEffect(() => {
+    const check = async () => {
+      const response = await axios.get(`/api/check`);
+      const data = response.data;
+      if (data === "create") {
+      } else {
+        router.replace("/");
+      }
+    };
+    check();
+  }, []);
   const [focus, setFocus] = useState("text");
   const router = useRouter();
-
   const {
     register,
     formState: { errors },

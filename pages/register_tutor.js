@@ -6,6 +6,17 @@ import states from "@/utils/states";
 import axios from "axios";
 import { useRouter } from "next/router";
 const Register_tutor = () => {
+  useEffect(() => {
+    const check = async () => {
+      const response = await axios.get(`/api/check`);
+      const data = response.data;
+      if (data === "create") {
+      } else {
+        router.replace("/");
+      }
+    };
+    check();
+  }, []);
   const [focus, setFocus] = useState("text");
   const router = useRouter();
   const {
