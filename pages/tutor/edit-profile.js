@@ -1,9 +1,19 @@
-import React, { useState } from "react";
 import Header from "@/components/Header";
-import { useForm } from "react-hook-form";
 import states from "@/utils/states";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import useCheck from "utils/useCheck";
 
 const EditProfile = () => {
+  const { user } = useUser();
+  useCheck(user, "tutor");
+  const router = useRouter();
+  if (!user) {
+    return null;
+  }
   const [focus, setFocus] = useState("text");
 
   const {
@@ -20,8 +30,18 @@ const EditProfile = () => {
   const selectedstate = watch("state");
 
   const onSubmit = (data) => {
-    console.log(data);
-    // console.log(errors);
+    axios({
+      method: "patch",
+      url: "/api/tutor",
+      data: data,
+    })
+      .then(function (response) {
+        console.log(response);
+        router.replace("/tutor/profile");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -197,5 +217,7 @@ const EditProfile = () => {
     </>
   );
 };
+
+export const getServerSideProps = withPageAuthRequired();
 
 export default EditProfile;

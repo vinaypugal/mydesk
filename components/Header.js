@@ -6,10 +6,6 @@ const Header = () => {
   const [mobile, setMobile] = useState(false);
   const { user, error, isLoading } = useUser();
   const router = useRouter();
-  const isSign =
-    router.pathname === "/login" ||
-    router.pathname === "/register_tutor" ||
-    router.pathname === "/register_student";
 
   return (
     <header id="header" className="fixed-top">
@@ -53,14 +49,7 @@ const Header = () => {
             {!user && (
               <li>
                 <Link href="/api/auth/login">
-                  <a className={isSign && "active"}> Sign In/Register </a>
-                </Link>
-              </li>
-            )}
-            {user && (
-              <li>
-                <Link href="/api/auth/logout">
-                  <a>Logout </a>
+                  <a className={"active"}> Sign In/Register </a>
                 </Link>
               </li>
             )}
@@ -72,30 +61,39 @@ const Header = () => {
               </Link>
             </li>
             {user && (
+              <li>
+                <Link href="/api/auth/logout">
+                  <a>Logout </a>
+                </Link>
+              </li>
+            )}
+            {user && (
               <li className="dropdown">
                 <a href="#">
                   <span>{user.email}</span>
                 </a>
                 <ul>
                   <li>
-                    <a href="">
-                      Dashboard
-                      <i
-                        style={{ fontSize: "20px" }}
-                        className="bx bx-medal"
-                      ></i>
-                    </a>
+                    <Link href={`/${user["https://mydesk.app/roles"]}/dashboard`}>
+                      <a>
+                        Dashboard
+                        <i
+                          style={{ fontSize: "20px" }}
+                          className="bx bx-medal"
+                        ></i>
+                      </a>
+                    </Link>
                   </li>
                   <li>
-                  <Link href="/student/profile">
-                    <a>
-                      My Profile
-                      <i
-                        style={{ fontSize: "20px" }}
-                        className="bx bx-user"
-                      ></i>
-                    </a>
-                  </Link>
+                    <Link href={`/${user["https://mydesk.app/roles"]}/profile`}>
+                      <a>
+                        My Profile
+                        <i
+                          style={{ fontSize: "20px" }}
+                          className="bx bx-user"
+                        ></i>
+                      </a>
+                    </Link>
                   </li>
                 </ul>
               </li>

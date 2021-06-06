@@ -1,7 +1,25 @@
-import React from "react";
 import Header from "@/components/Header";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import axios from "axios";
+import Loading from "components/Loading";
 import Link from "next/link";
+import React from "react";
+import useSWR from "swr";
+import useCheck from "utils/useCheck";
 const Profile = () => {
+  const { user } = useUser();
+  useCheck(user, "tutor");
+  if (!user) {
+    return null;
+  }
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR("/api/tutor", fetcher);
+
+  if (error) return <h1>failed to load</h1>;
+  if (!data) return <Loading />;
+  if (!data.profile) {
+    return <Loading />;
+  }
   return (
     <>
       <Header />
@@ -18,7 +36,7 @@ const Profile = () => {
                         style={{ fontSize: 50 }}
                       />
                       <div className="mt-3">
-                        <h4>Vinay</h4>
+                        <h4>{data.profile.name}</h4>
                       </div>
                     </div>
                   </div>
@@ -31,22 +49,14 @@ const Profile = () => {
                       <div className="mt-3">
                         <h4>Bio</h4>
                         <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Mauris nunc arcu, dignissim sit amet
-                          sollicitudin iaculis, vehicula id urna. Sed luctus
-                          urna nunc. Donec fermentum, magna sit amet rutrum
-                          pretium, turpis dolor molestie diam, ut lacinia diam
-                          risus eleifend sapien. Curabitur ac nibh nulla.
-                          Maecenas nec augue placerat, viverra tellus non,
-                          pulvinar risus. Donec fermentum, magna sit amet rutrum
-                          pretium.
+                        {data.profile.bio}
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-         
+
               <div className="col-mt-3">
                 <div className="card mb-3">
                   <div className="card-body">
@@ -54,7 +64,7 @@ const Profile = () => {
                       <div className="col-sm-3">
                         <h6 className="mb-0">Name</h6>
                       </div>
-                      <div className="col-sm-9 text-secondary">Vinay</div>
+                      <div className="col-sm-9 text-secondary">{data.profile.name}</div>
                     </div>
                     <hr />
                     <div className="row">
@@ -62,7 +72,7 @@ const Profile = () => {
                         <h6 className="mb-0">Email</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        vinay@gmail.com
+                      {data.email}
                       </div>
                     </div>
                     <hr />
@@ -70,7 +80,7 @@ const Profile = () => {
                       <div className="col-sm-3">
                         <h6 className="mb-0">Mobile No.</h6>
                       </div>
-                      <div className="col-sm-9 text-secondary">8899757763</div>
+                      <div className="col-sm-9 text-secondary">{data.profile.mobile}</div>
                     </div>
                     <hr />
                     <div className="row">
@@ -78,7 +88,7 @@ const Profile = () => {
                         <h6 className="mb-0">Address</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        Avadi, Chennai
+                      {data.profile.city}, {data.profile.state}
                       </div>
                     </div>
                     <hr />
@@ -102,4 +112,5 @@ const Profile = () => {
   );
 };
 
+export const getServerSideProps = withPageAuthRequired();
 export default Profile;

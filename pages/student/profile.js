@@ -1,8 +1,26 @@
-import React from "react";
 import Header from "@/components/Header";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import axios from "axios";
+import Loading from "components/Loading";
 import Link from "next/link";
+import React from "react";
+import useSWR from "swr";
+import useCheck from "utils/useCheck";
 
 const Profile = () => {
+  const { user } = useUser();
+  useCheck(user, "student");
+  if (!user) {
+    return null;
+  }
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR("/api/student", fetcher);
+
+  if (error) return <h1>failed to load</h1>;
+  if (!data) return <Loading />;
+  if (!data.profile) {
+    return <Loading />;
+  }
   return (
     <>
       <Header />
@@ -19,12 +37,16 @@ const Profile = () => {
                         style={{ fontSize: 50 }}
                       />
                       <div className="mt-3">
-                        <h4>Abinaya</h4>
-                        <p className="text-secondary mb-1">Grade 10</p>
-                        <p className="text-muted font-size-sm">
-                          Velammal School
+                        <h4>{data.profile.name}</h4>
+                        <p className="text-secondary mb-1">
+                          Grade {data.profile.class}
                         </p>
-                        <p className="text-muted font-size-sm">Stateboard</p>
+                        <p className="text-muted font-size-sm">
+                          {data.profile.school}
+                        </p>
+                        <p className="text-muted font-size-sm">
+                          {data.profile.board}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -37,7 +59,9 @@ const Profile = () => {
                       <div className="col-sm-3">
                         <h6 className="mb-0">Name</h6>
                       </div>
-                      <div className="col-sm-9 text-secondary">Abinaya V</div>
+                      <div className="col-sm-9 text-secondary">
+                        {data.profile.name}
+                      </div>
                     </div>
                     <hr />
                     <div className="row">
@@ -45,7 +69,7 @@ const Profile = () => {
                         <h6 className="mb-0">Email</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        abi@gmail.com
+                        {data.email}
                       </div>
                     </div>
 
@@ -54,14 +78,18 @@ const Profile = () => {
                       <div className="col-sm-3">
                         <h6 className="mb-0">Mobile No.</h6>
                       </div>
-                      <div className="col-sm-9 text-secondary">7904373819</div>
+                      <div className="col-sm-9 text-secondary">
+                        {data.profile.mobile}
+                      </div>
                     </div>
                     <hr />
                     <div className="row">
                       <div className="col-sm-3">
                         <h6 className="mb-0">Parent Mobile No.</h6>
                       </div>
-                      <div className="col-sm-9 text-secondary">8799763466</div>
+                      <div className="col-sm-9 text-secondary">
+                        {data.profile.parentmobile}
+                      </div>
                     </div>
                     <hr />
                     <div className="row">
@@ -69,7 +97,7 @@ const Profile = () => {
                         <h6 className="mb-0">Address</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        Avadi, Chennai
+                        {data.profile.city}, {data.profile.state}
                       </div>
                     </div>
                     <hr />
@@ -95,5 +123,7 @@ const Profile = () => {
     </>
   );
 };
+
+export const getServerSideProps = withPageAuthRequired();
 
 export default Profile;

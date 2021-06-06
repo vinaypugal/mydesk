@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { useForm } from "react-hook-form";
 import states from "@/utils/states";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const Register_student = () => {
-  // const [currentTab, setCurrentTab] = useState(1);
+  useEffect(() => {
+    const check = async () => {
+      const response = await axios.get(`/api/check`);
+      const data = response.data;
+      if (data === "create") {
+      } else {
+        router.replace("/");
+      }
+    };
+    check();
+  }, []);
   const [focus, setFocus] = useState("text");
-
+  const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -22,8 +34,15 @@ const Register_student = () => {
   const selectedstate = watch("state");
 
   const onSubmit = (data) => {
-    console.log(data);
-    // console.log(errors);
+    axios({
+      method: "post",
+      url: "/api/student",
+      data: data,
+    })
+      .then(function (response) {
+        router.replace("/student/profile");
+      })
+      .catch(function (error) {});
   };
 
   return (
@@ -70,7 +89,7 @@ const Register_student = () => {
                     id="dob"
                     onFocus={() => setFocus("date")}
                     placeholder="Date Of Birth"
-                    {...register("date", {
+                    {...register("dob", {
                       required: true,
                     })}
                   />
@@ -151,7 +170,7 @@ const Register_student = () => {
                     id="mobile-parent"
                     maxLength="10"
                     placeholder="Parent Contact Number"
-                    {...register("parent", {
+                    {...register("parentmobile", {
                       required: true,
                       pattern: /^[6-9]\d{9}$/,
                     })}
