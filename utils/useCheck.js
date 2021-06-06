@@ -12,21 +12,19 @@ const useCheck = (user, role) => {
       const data = response.data;
       setStatus(data);
     };
-    if (user["https://mydesk.app/roles"] !== role && !user.email_verified) {
+    if (user["https://mydesk.app/roles"] !== role) {
       router.replace("/");
     } else {
       check();
-      if (status === "denied"){
-        router.replace(`/`)
-      }
-      else if (status === "mail") {
+      if (status === "denied") {
+        router.replace(`/`);
+      } else if (status === "mail") {
         router.replace(`/mail`);
-      } 
-      else if (status === "create") {
+      } else if (status === "create") {
         router.replace(`/register_${role}`);
-      } 
+      }
     }
-  },[status]);
+  }, [status]);
 };
 
 export default useCheck;

@@ -1,28 +1,36 @@
 import Header from "@/components/Header";
+import Loading from "@/components/Loading";
 import states from "@/utils/states";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import axios from "axios";
-import useSWR from "swr";
-import Loading from "components/Loading";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useCheck from "utils/useCheck";
 
 const EditProfile = () => {
   const { user } = useUser();
-  // useCheck(user, "student");
-  const router = useRouter();
   if (!user) {
     return null;
   }
+  useCheck(user, "student");
+  const [formData, setformData] = useState(null);
+  useEffect(() => {
+    const fetcher = async () => {
+      const response = await fetch("/api/student");
+      const data = await response.json();
+      setformData({ ...data.profile, board: data.profile.board.toUpperCase() });
+    };
 
-  const fetcher = (url) => axios.get(url).then((res) => res.data);
-  const { data, error } = useSWR("/api/student", fetcher);
+    fetcher();
+  }, []);
 
-  if (error) return <h1>failed to load</h1>;
-  if (!data) return <Loading />;
-  console.log(data);
+  if (!formData) return <Loading />;
+  return <StudentForm formData={formData} />;
+};
+
+const StudentForm = ({ formData }) => {
+  const router = useRouter();
   const [focus, setFocus] = useState("text");
   const {
     register,
@@ -33,7 +41,7 @@ const EditProfile = () => {
     mode: "all",
     criteriaMode: "all",
     shouldFocusError: true,
-    defaultValues: {},
+    defaultValues: formData,
   });
   const selectedstate = watch("state");
 
@@ -44,7 +52,6 @@ const EditProfile = () => {
       data: data,
     })
       .then(function (response) {
-        console.log(response);
         router.replace("/student/profile");
       })
       .catch(function (error) {
@@ -75,7 +82,6 @@ const EditProfile = () => {
                 </div>
                 <div className="col-md-9">
                   <div className="tab-content">
-                    <input type="hidden" value={data._id}/>
                     <div id="account-general">
                       <hr className="border-light m-0" />
                       <div className="card-body" style={{ color: "red" }}>
@@ -90,7 +96,7 @@ const EditProfile = () => {
                             type="text"
                             className="form-control mb-1"
                             id="name"
-                            value={data.profile.name}
+                            name="name"
                             placeholder="Name"
                             {...register("name", { required: true })}
                           />
@@ -106,7 +112,6 @@ const EditProfile = () => {
                             onBlur={() => setFocus("text")}
                             className="form-control mb-1"
                             id="dob"
-                            value={data.profile.dob}
                             onFocus={() => setFocus("date")}
                             placeholder="Date Of Birth"
                             {...register("dob", {
@@ -124,7 +129,6 @@ const EditProfile = () => {
                             className="form-select mb-1"
                             id="class"
                             name="class"
-                            value={data.profile.class}
                             {...register("class", {
                               required: true,
                               pattern: /^[0-9]*$/,
@@ -151,7 +155,6 @@ const EditProfile = () => {
                             id="board"
                             placeholder="stateboard/CBSE"
                             name="board"
-                            value={data.profile.board}
                             {...register("board", {
                               required: true,
                               pattern: /(^CBSE$)|(^STATEBOARD$)/,
@@ -174,7 +177,6 @@ const EditProfile = () => {
                             type="text"
                             className="form-control mb-1"
                             id="school"
-                            value={data.profile.school}
                             placeholder="School"
                             {...register("school", {
                               required: true,
@@ -193,7 +195,6 @@ const EditProfile = () => {
                             name="state"
                             placeholder="State"
                             required
-                            value={data.profile.state}
                             {...register("state", {
                               required: true,
                               pattern: /^(?!(Select a state))/,
@@ -218,7 +219,6 @@ const EditProfile = () => {
                             id="city"
                             name="city"
                             placeholder="City"
-                            value={data.profile.city}
                             required
                             {...register("city", {
                               required: true,
@@ -252,7 +252,6 @@ const EditProfile = () => {
                             id="mobile"
                             name="mobile"
                             maxLength="10"
-                            value={data.profile.mobile}
                             placeholder="10 digit mobile number"
                             {...register("mobile", {
                               required: true,
@@ -265,9 +264,9 @@ const EditProfile = () => {
                             Parent Mobile Number
                           </label>
                           <br />
-                          {errors.parent?.type === "required" &&
+                          {errors.parentmobile?.type === "required" &&
                             "Parent mobile number is required"}
-                          {errors.parent?.type === "pattern" &&
+                          {errors.parentmobile?.type === "pattern" &&
                             "Enter a valid mobile number"}
                           <input
                             type="number"
@@ -275,7 +274,6 @@ const EditProfile = () => {
                             id="mobile-parent"
                             maxLength="10"
                             placeholder="Parent Contact Number"
-                            value={data.profile.parentmobile}
                             {...register("parentmobile", {
                               required: true,
                               pattern: /^[6-9]\d{9}$/,
